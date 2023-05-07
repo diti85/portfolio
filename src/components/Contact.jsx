@@ -42,7 +42,7 @@ const Contact = () => {
           to_email: "bashaditi@gmail.com",
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+        'zSKYmPunmMrSb9wIA'
       )
       .then(
         () => {
