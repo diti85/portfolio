@@ -14,5 +14,4 @@ This frontend project is a portfolio showcase created using Vite React and Three
 - Framer Motion
 - EmailJS Integration
 
-
-
+Deployed using github pages at https://endritbasha.com
