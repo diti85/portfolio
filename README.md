@@ -14,4 +14,4 @@ This project is a portfolio showcase created using Vite React and Three.js. It p
 - Framer Motion
 - EmailJS Integration
 
-Deployed using github pages at https://endritbasha.com
+Deployed with github pages at https://endritbasha.com
