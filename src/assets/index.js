@@ -36,6 +36,8 @@ import mysql from './tech/mysql.png'
 import  household from './household.png'
 import simbank from './simbank.jpg'
 import reactique from './reactique.png'
+import datenight from './date-night-sc.png'
+import nptg from './nptg.png'
 
 
 export {
@@ -77,4 +79,6 @@ export {
   household,
   simbank,
   reactique,
+  datenight,
+  nptg,
 };

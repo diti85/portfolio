@@ -26,7 +26,9 @@ import {
     ws,
     household,
     simbank,
-    reactique
+    reactique,
+    datenight,
+    nptg,
   } from "../assets";
   
   export const navLinks = [
@@ -46,7 +48,7 @@ import {
   
   const services = [
     {
-      title: "Java Developer",
+      title: "Backend Developer",
       icon: web,
     },
     {
@@ -54,7 +56,7 @@ import {
       icon: mobile,
     },
     {
-      title: "Machine Learning",
+      title: "DevOps",
       icon: backend,
     },
   ];
@@ -184,6 +186,27 @@ import {
   
   const projects = [
     {
+      name: "Non Profit Tech Guide",
+      description:
+        "My capstone project where I led in backend development, architecting and implementing a robust authentication system. Leveraged cutting-edge cloud services, including AWS Cognito, Lambda functions, and Serverless Application Model (SAM), to ensure secure and scalable user authentication and authorization processes.",
+      tags: [
+        {
+          name: "aws",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "react",
+          color: "green-text-gradient",
+        },
+        {
+          name: "serverless",
+          color: "pink-text-gradient",
+        },
+      ],
+      image: nptg,
+      source_code_link: "github.com/diti85",
+    },
+    {
       name: "HouseHold",
       description:
         "Full-stack application for mobile and web that improves productivity between roomates by allowing users to create, manage, and join households with their roomates. Roomates can create and manage events, tasks, and shopping lists for their household.",
@@ -227,6 +250,31 @@ import {
         },
       ],
       image: simbank,
+      source_code_link: "https://github.com/diti85",
+    },
+    {
+      name: "Date Night",
+      description:
+        "A personalized date night app I made for my girlfriend to solve the 'what to eat' dilemma with a fun and user-friendly way that allows you to create and manage date night ideas. Users can create, edit, and delete date night ideas. Users can also filter date night ideas by category.",
+      tags: [
+        {
+          name: "react",
+          color: "blue-text-gradient",
+        },
+        {
+          name: "node",
+          color: "green-text-gradient",
+        },
+        {
+          name: "express",
+          color: "pink-text-gradient",
+        },
+        {
+          name: "mongodb",
+          color: "blue-text-gradient",
+        },
+      ],
+      image: datenight,
       source_code_link: "https://github.com/diti85",
     },
     {
