@@ -46,7 +46,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        Highly motivated computer science student with a passion for software engineering. Skilled in a range of programming languages and technologies, with a particular interest in Cloud Computing and DevOps. Originally from Kosovo, moved to the FL, USA five years ago to pursue the American Dream.
+        New UCF graduate and software engineer with a focus on cloud computing, full-stack development, and DevOps. Eager to contribute a fresh perspective and innovative approach to elevate projects and drive success.
       </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>

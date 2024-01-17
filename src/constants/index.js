@@ -48,7 +48,7 @@ import {
   
   const services = [
     {
-      title: "Backend Developer",
+      title: "Full Stack Developer",
       icon: web,
     },
     {
@@ -131,11 +131,11 @@ import {
   
   const experiences = [
     {
-      title: "Web Developer",
+      title: "Software Engineer Intern",
       company_name: "Wizard Studios",
       icon: ws,
       iconBg: "#E6DEDD",
-      date: "Jan 2021 - Feb 2022",
+      date: "Jan 2021 - Jan 2022",
       points: [      ],
     },
     {
@@ -143,7 +143,7 @@ import {
       company_name: "University of Central Florida",
       icon: ucf,
       iconBg: "#383E56",
-      date: "Jan 2022 - Expected Dec 2023",
+      date: "Jan 2022 - Dec 2023",
       points: [
       ],
     },
