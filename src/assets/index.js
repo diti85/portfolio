@@ -38,6 +38,7 @@ import simbank from './simbank.jpg'
 import reactique from './reactique.png'
 import datenight from './date-night-sc.png'
 import nptg from './nptg.png'
+import geico from './geico.png'
 
 
 export {
@@ -81,4 +82,5 @@ export {
   reactique,
   datenight,
   nptg,
+  geico,
 };

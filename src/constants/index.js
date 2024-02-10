@@ -29,6 +29,7 @@ import {
     reactique,
     datenight,
     nptg,
+    geico,
   } from "../assets";
   
   export const navLinks = [
@@ -131,7 +132,15 @@ import {
   
   const experiences = [
     {
-      title: "Software Engineer Intern",
+      title: "TDP Software Engineer",
+      company_name: "GEICO",
+      icon: geico,
+      iconBg: "#E6DEDD",
+      date: "Mar 2023 - Present",
+      points: [      ],
+    },
+    {
+      title: "Software Engineer",
       company_name: "Wizard Studios",
       icon: ws,
       iconBg: "#E6DEDD",
@@ -143,7 +152,7 @@ import {
       company_name: "University of Central Florida",
       icon: ucf,
       iconBg: "#383E56",
-      date: "Jan 2022 - Dec 2023",
+      date: "Aug 2021 - Dec 2023",
       points: [
       ],
     },
@@ -152,7 +161,7 @@ import {
       company_name: "Palm Beach State College",
       icon: pbsc,
       iconBg: "#E6DEDD",
-      date: "Jan 2021 - Dec 2022",
+      date: "Aug 2020 - May 2022",
       points: [],
     },
   ];
