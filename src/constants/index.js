@@ -53,6 +53,10 @@ import {
       icon: web,
     },
     {
+      title: "Data Engineering",
+      icon: mobile,
+    },
+    {
       title: "Cloud Computing",
       icon: mobile,
     },

@@ -46,7 +46,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-        New UCF graduate and software engineer with a focus on cloud computing, full-stack development, and DevOps. Eager to contribute a fresh perspective and innovative approach to elevate projects and drive success.
+        Software engineer and UCF graduate with experience in data engineering, cloud computing, full-stack development, and devops. Always looking to learn and be better.
       </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>
