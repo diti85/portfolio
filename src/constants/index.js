@@ -136,11 +136,19 @@ import {
   
   const experiences = [
     {
-      title: "TDP Software Engineer",
+      title: "Software Engineer II",
       company_name: "GEICO",
       icon: geico,
       iconBg: "#E6DEDD",
-      date: "Mar 2023 - Present",
+      date: "Aug 2025 - Present",
+      points: [      ],
+    },
+    {
+      title: "Software Engineer I",
+      company_name: "GEICO",
+      icon: geico,
+      iconBg: "#E6DEDD",
+      date: "Mar 2024 - Aug 2025",
       points: [      ],
     },
     {
@@ -148,7 +156,7 @@ import {
       company_name: "Wizard Studios",
       icon: ws,
       iconBg: "#E6DEDD",
-      date: "Jan 2021 - Jan 2022",
+      date: "Jan 2021 - Jan 2023",
       points: [      ],
     },
     {
