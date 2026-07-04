@@ -1,17 +1,25 @@
+# endritbasha.com
 
-# Portfolio Website | React and ThreeJS
-![website screensholt](https://github.com/diti85/portfolio/assets/101580207/9a8f6b8c-f098-4e69-b3e7-07571e55dc28)
+Personal portfolio — custom "Ember Field" design: a crimson particle terrain
+built with React Three Fiber over a dark editorial layout.
 
-This project is a portfolio showcase created using Vite React and Three.js. It provides a visually stunning and interactive way to showcase my background and projects.
+## Stack
 
-
-
-## Made using 
-
-- Vite React 
-- ThreeJS
-- TailwindCSS
+- Vite + React
+- Three.js via @react-three/fiber (custom GLSL point shader)
+- Tailwind CSS
 - Framer Motion
-- EmailJS Integration
+- EmailJS
 
-Deployed with github pages at https://endritbasha.com
+## Develop
+
+```bash
+npm install
+npm run dev
+```
+
+## Deploy
+
+```bash
+npm run deploy   # builds and publishes to GitHub Pages (endritbasha.com)
+```
