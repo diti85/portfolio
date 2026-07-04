@@ -23,7 +23,6 @@ const Footer = () => (
           rel="noreferrer"
           className="font-mono text-[12px] text-body hover:text-accent transition-colors"
         >
-          {/* TODO(endrit): verify LinkedIn URL */}
           LinkedIn
         </a>
       </div>

@@ -30,8 +30,9 @@ const Hero = () => {
           </motion.h1>
 
           <motion.p variants={fadeUp()} className={styles.heroSubText}>
-            I build resilient Go services and polished React applications
-            &mdash; engineering insurance products used by millions.
+            I build the systems behind the product &mdash; data platforms and
+            cloud services engineered to stay fast, reliable, and invisible at
+            scale.
           </motion.p>
 
           <motion.div variants={fadeUp()} className="mt-4 flex gap-4 pointer-events-auto">

@@ -14,17 +14,19 @@ const About = () => {
           className="lg:col-span-3 font-display text-heading text-[22px] sm:text-[28px] leading-snug font-medium"
         >
           I turn complex problems into reliable, elegant software &mdash; from
-          Go services running at scale to interfaces people actually enjoy
-          using.
+          data platforms processing tens of millions of messages a day to
+          interfaces people actually enjoy using.
         </motion.p>
 
         <div className="lg:col-span-2 flex flex-col gap-6">
           <motion.p variants={fadeUp(0.2)} className="text-body text-[15px] leading-relaxed">
-            I&apos;m a software engineer at GEICO working across the stack: Go
-            and Java services on the backend, React on the front end, and the
-            cloud infrastructure in between. I care about clean architecture,
-            fast feedback loops, and shipping things that hold up in
-            production.
+            I&apos;m a software engineer on GEICO&apos;s Data Engineering team,
+            where I design distributed ingestion pipelines, observability
+            tooling, and the Go services that keep them fast and
+            fault-tolerant. I care about clean architecture, performance under
+            real load, and shipping things that hold up in production &mdash;
+            and I&apos;m currently pursuing my M.S. in Computer Science at
+            UIUC.
           </motion.p>
 
           <motion.div
@@ -37,11 +39,11 @@ const About = () => {
             </p>
             <p>
               <span className="text-accent">focus</span>
-              <span className="text-body"> — Go · distributed systems · React</span>
+              <span className="text-body"> — Go · distributed data systems · cloud</span>
             </p>
             <p>
-              <span className="text-accent">interests</span>
-              <span className="text-body"> — cloud architecture · AI</span>
+              <span className="text-accent">education</span>
+              <span className="text-body"> — M.S. CS @ UIUC (in progress)</span>
             </p>
           </motion.div>
         </div>

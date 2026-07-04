@@ -147,9 +147,8 @@ const Contact = () => {
               <span className="text-body"> — github.com/diti85</span>
             </p>
             <p>
-              {/* TODO(endrit): verify location */}
-              <span className="text-accent">location</span>
-              <span className="text-body"> — Florida, USA</span>
+              <span className="text-accent">linkedin</span>
+              <span className="text-body"> — linkedin.com/in/endritbasha</span>
             </p>
           </div>
         </motion.div>

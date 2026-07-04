@@ -16,11 +16,17 @@ const Tech = () => {
             variants={fadeUp(index * 0.04)}
             className="group flex flex-col items-center justify-center gap-3 bg-surface border border-white/5 hover:border-accent/40 rounded-xl py-6 transition-colors duration-300"
           >
-            <img
-              src={tech.icon}
-              alt={tech.name}
-              className="w-10 h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-            />
+            {tech.icon ? (
+              <img
+                src={tech.icon}
+                alt={tech.name}
+                className="w-10 h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+            ) : (
+              <span className="w-10 h-10 flex items-center justify-center font-mono text-[15px] font-medium text-accent/90 border border-accent/30 rounded-lg opacity-80 group-hover:opacity-100 transition-opacity">
+                {tech.abbr}
+              </span>
+            )}
             <span className="font-mono text-[11px] text-body group-hover:text-heading transition-colors">
               {tech.name}
             </span>

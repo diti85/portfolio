@@ -10,11 +10,17 @@ const ExperienceCard = ({ experience, index }) => (
 
     <div className="flex items-center gap-4">
       <span className="w-12 h-12 rounded-lg bg-surface border border-white/10 flex items-center justify-center overflow-hidden shrink-0">
-        <img
-          src={experience.icon}
-          alt={experience.company_name}
-          className="w-8 h-8 object-contain"
-        />
+        {experience.icon ? (
+          <img
+            src={experience.icon}
+            alt={experience.company_name}
+            className="w-8 h-8 object-contain"
+          />
+        ) : (
+          <span className="font-mono text-[18px] font-medium text-accent">
+            {experience.abbr}
+          </span>
+        )}
       </span>
       <div>
         <p className="font-mono text-[12px] text-accent tracking-[0.15em] uppercase">
