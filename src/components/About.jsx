@@ -1,58 +1,50 @@
-import React from "react";
-import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
+import { fadeUp } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
-import { styles } from "../styles";
-import { services } from "../constants";
-import { fadeIn, textVariant } from "../utils/motion";
-
-const ServiceCard = ({ index, title, icon }) => (
-  <Tilt className='xs:w-[250px] w-full'>
-    <motion.div
-      variants={fadeIn("right", "spring", index * 0.5, 0.75)}
-      className='w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card'
-    >
-      <div
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
-      >
-        <img
-          src={icon}
-          alt='web-development'
-          className='w-16 h-16 object-contain'
-        />
-
-        <h3 className='text-white text-[20px] font-bold text-center'>
-          {title}
-        </h3>
-      </div>
-    </motion.div>
-  </Tilt>
-);
+import SectionHeader from "./SectionHeader";
 
 const About = () => {
   return (
     <>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Background.</h2>
-      </motion.div>
+      <SectionHeader eyebrow="01 — About" title="Overview" />
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
-      >
-        Software engineer and UCF graduate with experience in data engineering, cloud computing, full-stack development, and devops. Always looking to learn and be better.
-      </motion.p>
+      <div className="mt-10 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
+        <motion.p
+          variants={fadeUp(0.1)}
+          className="lg:col-span-3 font-display text-heading text-[22px] sm:text-[28px] leading-snug font-medium"
+        >
+          I turn complex problems into reliable, elegant software &mdash; from
+          Go services running at scale to interfaces people actually enjoy
+          using.
+        </motion.p>
 
-      <div className='mt-20 flex flex-wrap gap-10'>
-        {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
-        ))}
+        <div className="lg:col-span-2 flex flex-col gap-6">
+          <motion.p variants={fadeUp(0.2)} className="text-body text-[15px] leading-relaxed">
+            I&apos;m a software engineer at GEICO working across the stack: Go
+            and Java services on the backend, React on the front end, and the
+            cloud infrastructure in between. I care about clean architecture,
+            fast feedback loops, and shipping things that hold up in
+            production.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp(0.3)}
+            className="font-mono text-[13px] bg-surface border border-white/5 rounded-xl p-5 flex flex-col gap-2.5"
+          >
+            <p>
+              <span className="text-accent">role</span>
+              <span className="text-body"> — Software Engineer II @ GEICO</span>
+            </p>
+            <p>
+              <span className="text-accent">focus</span>
+              <span className="text-body"> — Go · distributed systems · React</span>
+            </p>
+            <p>
+              <span className="text-accent">interests</span>
+              <span className="text-body"> — cloud architecture · AI</span>
+            </p>
+          </motion.div>
+        </div>
       </div>
     </>
   );
