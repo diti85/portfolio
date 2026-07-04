@@ -1,27 +1,31 @@
-import { BrowserRouter } from 'react-router-dom';
+import { MotionConfig } from "framer-motion";
 
-import {About, Contact, Experience, Hero, Navbar, Tech, Works, StarsCanvas } from './components';
-
+import {
+  About,
+  Contact,
+  Experience,
+  Footer,
+  Hero,
+  Navbar,
+  Tech,
+  Works,
+} from "./components";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <MotionConfig reducedMotion="user">
       <div className="relative z-0 bg-bg">
-        <div>
-          <Navbar />
-          <Hero />
-        </div>
+        <Navbar />
+        <Hero />
         <About />
         <Experience />
         <Tech />
         <Works />
-        <div className='relative z-0'>
-          <Contact />
-          <StarsCanvas />
-        </div>
+        <Contact />
+        <Footer />
       </div>
-    </BrowserRouter>
-  )
-}
+    </MotionConfig>
+  );
+};
 
 export default App;
