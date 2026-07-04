@@ -89,6 +89,12 @@ const Field = ({ density, opacity, interactive }) => {
     return arr;
   }, [density]);
 
+  const geometry = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    return g;
+  }, [positions]);
+
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
@@ -139,15 +145,7 @@ const Field = ({ density, opacity, interactive }) => {
 
   return (
     <group ref={groupRef}>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={positions.length / 3}
-            array={positions}
-            itemSize={3}
-          />
-        </bufferGeometry>
+      <points geometry={geometry} frustumCulled={false}>
         <shaderMaterial
           ref={materialRef}
           vertexShader={vertexShader}
