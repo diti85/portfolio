@@ -10,6 +10,10 @@ module.exports = {
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
-    'react-refresh/only-export-components': 'warn',
+    // Plain-JS React project — prop shapes are documented in the plan/spec,
+    // not enforced with prop-types.
+    'react/prop-types': 'off',
+    // SectionWrapper HOC exports intentionally wrap components.
+    'react-refresh/only-export-components': 'off',
   },
 }
