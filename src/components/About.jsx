@@ -36,10 +36,11 @@ export default function About() {
               computer science at the University of Illinois.
             </p>
             <p>
-              On my own time I build for associations and nonprofits: OneAMS, a membership platform
-              with AI assistants built in; AIP, which maps the market it serves; and websites for
-              organizations that need a hand. Before GEICO I spent three years shipping client
-              projects at Wizard Studios, and I earned my B.S. at the University of Central Florida.
+              On my own time I build products and websites: OneAMS, a membership platform for
+              associations with AI assistants built in; AIP, which maps the market it serves; and
+              sites for South Florida businesses and a youth-mentoring nonprofit. Before GEICO I
+              spent three years shipping client projects at Wizard Studios, and I earned my B.S. at
+              the University of Central Florida.
             </p>
           </div>
 

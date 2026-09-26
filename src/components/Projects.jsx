@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
-import { archive, projects } from "../data/content";
+import { clientSites, projects } from "../data/content";
 import { lockScroll } from "../lib/scroll";
 import { useMediaQuery } from "../lib/useInView";
 
@@ -14,51 +14,17 @@ function ExternalGlyph() {
   );
 }
 
-// A capture calendar like the Wayback Machine's: the only record left of the site.
-const CAPTURED = new Set([
-  3, 9, 10, 17, 30, 31, 44, 52, 53, 67, 71, 80, 88, 89, 97, 104, 118, 121, 122, 135, 140, 148,
-]);
-function ArchivePlate() {
-  return (
-    <div className="flex h-full w-full flex-col justify-between bg-felt p-6 sm:p-10">
-      <div
-        className="grid grid-cols-[repeat(26,minmax(0,1fr))] gap-y-3 sm:gap-y-4"
-        aria-hidden="true"
-      >
-        {Array.from({ length: 156 }, (_, i) => (
-          <span key={i} className="grid place-items-center">
-            <span
-              className={`block size-1.5 rounded-full sm:size-2 ${
-                i === 155
-                  ? "bg-gilt shadow-[0_0_12px_3px_rgba(235,210,159,0.55)]"
-                  : CAPTURED.has(i)
-                    ? "bg-brass/80"
-                    : "bg-bone/10"
-              }`}
-            />
-          </span>
-        ))}
-      </div>
-      <p className="display text-4xl italic text-bone sm:text-6xl">Restored.</p>
-    </div>
-  );
-}
-
 function Frame({ project }) {
   return (
     <div className="border border-brass/25 bg-lacquer-deep p-2 sm:p-3">
       <div className="relative aspect-[16/10] overflow-hidden">
-        {project.image ? (
-          <img
-            src={project.image}
-            alt={project.imageAlt}
-            loading="lazy"
-            decoding="async"
-            className="h-full w-full object-cover object-top transition-transform duration-[1400ms] ease-[var(--ease-silk)] group-hover:scale-[1.035]"
-          />
-        ) : (
-          <ArchivePlate />
-        )}
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover object-top transition-transform duration-[1400ms] ease-[var(--ease-silk)] group-hover:scale-[1.035]"
+        />
       </div>
     </div>
   );
@@ -259,7 +225,8 @@ function CaseStudy({ project, onClose }) {
   );
 }
 
-function Archive() {
+// Client websites: a quiet list, with a live preview trailing the pointer on desktop.
+function ClientSites() {
   const fine = useMediaQuery("(hover: hover) and (pointer: fine)");
   const [hover, setHover] = useState(null);
   const x = useMotionValue(0);
@@ -271,46 +238,51 @@ function Archive() {
     <div
       className="relative mt-24 md:mt-32"
       onPointerMove={(e) => {
-        x.set(e.clientX + 24);
-        y.set(e.clientY - 90);
+        x.set(e.clientX + 28);
+        y.set(e.clientY - 110);
       }}
     >
-      <h3 className="display text-3xl md:text-4xl">Earlier work</h3>
-      <p className="mt-3 max-w-[52ch] text-sm text-moss">
-        University and side projects from before GEICO, kept here for the record.
-      </p>
+      <div className="grid gap-4 lg:grid-cols-12">
+        <h3 className="display text-3xl md:text-4xl lg:col-span-6">
+          Websites for local businesses
+        </h3>
+        <p className="max-w-[52ch] text-sm text-moss lg:col-span-5 lg:col-start-8 lg:self-end">
+          Sites I&rsquo;ve built for South Florida businesses, from family restaurants to marine
+          suppliers. All of them are live.
+        </p>
+      </div>
       <ul className="mt-8 border-b border-bone/10">
-        {archive.map((a) => {
-          const Row = a.url ? "a" : "div";
-          return (
-            <li key={a.name} className="border-t border-bone/10">
-              <Row
-                {...(a.url
-                  ? { href: a.url, target: "_blank", rel: "noreferrer", "data-cursor": "Source" }
-                  : {})}
-                onPointerEnter={() => setHover(a)}
-                onPointerLeave={() => setHover(null)}
-                className="group grid grid-cols-12 items-baseline gap-x-4 gap-y-1 py-5 transition-colors"
-              >
-                <span className="figures col-span-2 text-xs text-moss md:col-span-1">{a.year}</span>
-                <span className="display col-span-10 text-xl text-bone transition-transform duration-500 group-hover:translate-x-1.5 md:col-span-4 md:text-2xl">
-                  {a.name}
+        {clientSites.map((site) => (
+          <li key={site.name} className="border-t border-bone/10">
+            <a
+              href={site.url}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="Visit"
+              onPointerEnter={() => setHover(site)}
+              onPointerLeave={() => setHover(null)}
+              className="group grid grid-cols-12 items-center gap-x-4 gap-y-2 py-5 md:py-6"
+            >
+              <img
+                src={site.image}
+                alt=""
+                loading="lazy"
+                className="col-span-4 row-span-3 aspect-[16/10] w-full border border-brass/25 object-cover object-top md:hidden"
+              />
+              <span className="col-span-8 md:col-span-4">
+                <span className="display block text-xl text-bone transition-transform duration-500 group-hover:translate-x-1.5 md:text-2xl">
+                  {site.name}
                 </span>
-                <span className="col-span-10 col-start-3 text-sm md:col-span-4 md:col-start-auto">
-                  {a.note}
-                </span>
-                <span className="col-span-10 col-start-3 text-xs text-moss md:col-span-3 md:col-start-auto md:text-right">
-                  {a.stack}
-                  {a.url && (
-                    <span className="ml-2 inline-block text-brass">
-                      <ExternalGlyph />
-                    </span>
-                  )}
-                </span>
-              </Row>
-            </li>
-          );
-        })}
+                <span className="mt-1 block text-2xs text-moss md:text-xs">{site.kind}</span>
+              </span>
+              <span className="col-span-8 text-sm md:col-span-5">{site.note}</span>
+              <span className="col-span-8 inline-flex items-center gap-1.5 text-xs text-brass md:col-span-3 md:justify-end">
+                {site.urlLabel}
+                <ExternalGlyph />
+              </span>
+            </a>
+          </li>
+        ))}
       </ul>
 
       {fine && (
@@ -319,7 +291,7 @@ function Archive() {
             <motion.div
               key="preview"
               aria-hidden="true"
-              className="pointer-events-none fixed left-0 top-0 z-40 w-64 border border-brass/30 bg-lacquer-deep p-1.5"
+              className="pointer-events-none fixed left-0 top-0 z-40 w-80 border border-brass/30 bg-lacquer-deep p-1.5"
               style={{ x: sx, y: sy }}
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -353,8 +325,8 @@ export default function Projects() {
             Built on my own time.
           </h2>
           <p className="max-w-[46ch] self-end text-base md:text-lg lg:col-span-4 lg:col-start-9">
-            Products and sites I&rsquo;ve designed, built and shipped outside the day job, most of
-            them for associations and nonprofits.
+            Products and sites I&rsquo;ve designed, built and shipped outside the day job, for
+            startups, nonprofits and small businesses.
           </p>
         </div>
 
@@ -364,7 +336,7 @@ export default function Projects() {
           ))}
         </div>
 
-        <Archive />
+        <ClientSites />
       </div>
 
       <AnimatePresence>{open && <CaseStudy project={open} onClose={close} />}</AnimatePresence>

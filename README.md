@@ -14,8 +14,8 @@ one service.
   batching, backpressure, delivery to Cosmos DB and Snowflake) on a 2D canvas
   (`src/components/pipeline/sim.js`), followed by an interactive lineage graph where you break a
   node and watch the health engine trace the impact downstream.
-- **Projects:** OneAMS, AIP, Basha Management and a nonprofit site rescue, each with a case-study
-  drawer, plus an archive of earlier work with hover previews.
+- **Projects:** OneAMS, AIP, Young Men of Distinction, Sunrise Apartments and Basha Management,
+  each with a case-study drawer, plus live client websites with hover previews.
 - **Experience:** the career drawn as threads on a time axis, with a ledger of outcomes.
 - **About, Contact:** portrait, capabilities, credentials, an EmailJS form and local time.
 - **Extras:** ⌘K / Ctrl+K command menu, Lenis smooth scrolling, a pointer companion on fine

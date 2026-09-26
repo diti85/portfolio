@@ -49,14 +49,15 @@ Footer. The global ⌘K command menu and the pointer companion are available thr
 
 ## Project selection
 
-Chosen from a survey of `~/Documents/Repos` on 2026-09-25:
+Chosen from a survey of `~/Documents/Repos` on 2026-09-25, then revised with Endrit on
+2026-09-26:
 
 - OneAMS (`bms`): the flagship. Product screenshots are from its public marketing assets.
 - AIP (`aip`): screenshot of the public landing page only, never of organization data.
+- Young Men of Distinction (`ymod`): named with Endrit's go-ahead. The screenshot shows the
+  programs section rather than the homepage hero, which is a group photo of minors.
+- Sunrise Apartments (`sunrise-apartments`): live at sunriseprishtina.com.
 - Basha Management (`basha-mgmt-co`): the live site.
-- Nonprofit rescue (`ymod`): kept anonymous, with no client assets, until the client approves.
-- Archive: capstone and university projects from 2023.
-
-Skipped: structurize-mvp (template landing page only), londy-gifts (personal),
-date-night-ai (never committed), the FAPPO mockup (a pitch for a real organization), and
-coursework repositories.
+- Client websites, replacing the old archive of university projects: La Fogata, La Bamba,
+  Momentum Real Estate Group, DRSA and Marine Plumbing Co. Screenshots were taken from the live
+  sites on 2026-09-26.

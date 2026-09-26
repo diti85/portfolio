@@ -6,11 +6,14 @@ import oneamsToday from "../assets/projects/oneams-today.webp";
 import oneamsAsk from "../assets/projects/oneams-ask.webp";
 import aipSite from "../assets/projects/aip.webp";
 import bashaSite from "../assets/projects/basha-mgmt.webp";
-import nptg from "../assets/archive/nptg.webp";
-import household from "../assets/archive/household.webp";
-import simbank from "../assets/archive/simbank.webp";
-import datenight from "../assets/archive/date-night-sc.webp";
-import reactique from "../assets/archive/reactique.webp";
+import ymodSite from "../assets/projects/ymod.webp";
+import sunriseSite from "../assets/projects/sunrise.webp";
+import sunriseSuites from "../assets/projects/sunrise-suites.webp";
+import lafogata from "../assets/sites/lafogata.webp";
+import labamba from "../assets/sites/labamba.webp";
+import momentum from "../assets/sites/momentum.webp";
+import drsa from "../assets/sites/drsa.webp";
+import marine from "../assets/sites/marine.webp";
 
 export const profile = {
   name: "Endrit Basha",
@@ -181,6 +184,68 @@ export const projects = [
     },
   },
   {
+    id: "ymod",
+    name: "Young Men of Distinction",
+    years: "2026",
+    role: "Volunteer engineer, via Catchafire",
+    summary:
+      "A youth-mentoring nonprofit lost its website when its previous developer disappeared with it. I rebuilt it from the archives and handed it back.",
+    image: ymodSite,
+    imageAlt:
+      "The Young Men of Distinction homepage section introducing its three programs: Young Men, Young Ladies and Young People of Distinction.",
+    url: "https://youngpeopleofdistinction.org",
+    urlLabel: "youngpeopleofdistinction.org",
+    facts: [
+      { value: "0", label: "source files to start from" },
+      { value: "3", label: "programs on one site" },
+      { value: "1", label: "theme staff edit themselves" },
+    ],
+    stack: ["WordPress", "Custom block theme", "PHP", "WP-CLI", "Python"],
+    story: {
+      problem:
+        "With no access to the old site, its files or its hosting, the only surviving copy of the organization's web presence was in public archives.",
+      built: [
+        "Recovered the old pages and images from the Wayback Machine and scripted their import into a fresh WordPress install.",
+        "Designed a custom block theme around the programs' own logos, so non-technical staff can update every page without a developer.",
+        "One site for all three programs (Young Men, Young Ladies and Young People of Distinction), with enrollment guidance, mentee applications, alumni profiles, events, sponsorship and donations.",
+        "Wrote handoff documentation so the team can run the site on its own.",
+      ],
+      gallery: [],
+    },
+  },
+  {
+    id: "sunrise",
+    name: "Sunrise Apartments",
+    years: "2026",
+    role: "Design and engineering",
+    summary:
+      "An image-first site for three furnished luxury suites in Prishtina, Kosovo, built to let guests compare them and ask about a stay.",
+    image: sunriseSite,
+    imageAlt:
+      "The Sunrise Apartments homepage: “Where Elegance Meets Comfort” over a photo of a suite's bedroom and living area.",
+    url: "https://sunriseprishtina.com",
+    urlLabel: "sunriseprishtina.com",
+    facts: [
+      { value: "3", label: "suites, each with its own gallery" },
+      { value: "64", label: "photographs" },
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Tailwind", "shadcn/ui", "Framer Motion", "Vercel"],
+    story: {
+      problem:
+        "Three apartments with very different characters, from minimalist to classic to loft, needed one place where guests could see each of them properly before getting in touch.",
+      built: [
+        "A full-screen hero carousel that cycles through the suites, then a card for each suite with its size, amenities and a full photo gallery.",
+        "Responsive, animated layout with optimized images, from phone to desktop.",
+      ],
+      gallery: [
+        {
+          src: sunriseSuites,
+          alt: "Suite A57 on the Sunrise Apartments site: a photo grid beside its description, size and amenities.",
+        },
+      ],
+    },
+  },
+  {
     id: "basha",
     name: "Basha Management",
     years: "2025–2026",
@@ -205,73 +270,49 @@ export const projects = [
       gallery: [],
     },
   },
-  {
-    id: "rescue",
-    name: "A nonprofit, restored",
-    years: "2026",
-    role: "Volunteer engineer, via Catchafire",
-    summary:
-      "A youth-mentoring nonprofit lost its website when its previous developer disappeared. I brought it back.",
-    image: null,
-    url: null,
-    facts: [
-      { value: "0", label: "source files to start from" },
-      { value: "1", label: "theme staff can edit themselves" },
-    ],
-    stack: ["WordPress", "PHP", "WP-CLI", "Python"],
-    story: {
-      problem:
-        "With no access to the old site, its files or its hosting, the only surviving copy of the organization's web presence was in public archives.",
-      built: [
-        "Recovered pages and images from the Wayback Machine and scripted their import into a fresh install.",
-        "Rebuilt the site as a custom block-editor theme, so non-technical staff can update it without a developer.",
-        "Set up program application forms and wrote handoff documentation for the team.",
-      ],
-      gallery: [],
-    },
-  },
 ];
 
-export const archive = [
+// Live sites built for South Florida businesses.
+export const clientSites = [
   {
-    year: "2023",
-    name: "Non Profit Tech Guide",
-    note: "Capstone: a platform connecting nonprofits with vetted vendors, with MFA and SSO",
-    stack: "AWS Lambda, DynamoDB, Cognito, React",
-    image: nptg,
-    url: null,
+    name: "La Fogata",
+    kind: "Mexican restaurant, North Palm Beach",
+    note: "Menu, online ordering, rewards, catering requests and table booking for a family restaurant.",
+    image: lafogata,
+    url: "https://lafogatamenu.com",
+    urlLabel: "lafogatamenu.com",
   },
   {
-    year: "2023",
-    name: "HouseHold",
-    note: "Shared tasks, lists and events for roommates, on web and mobile",
-    stack: "React Native, GraphQL, AWS",
-    image: household,
-    url: "https://github.com/diti85/large-project",
+    name: "La Bamba",
+    kind: "Mexican and Spanish restaurants, since 1988",
+    note: "Two locations, from North Palm Beach to Fort Lauderdale, with online ordering, group platters and hiring.",
+    image: labamba,
+    url: "https://labamba123.com",
+    urlLabel: "labamba123.com",
   },
   {
-    year: "2023",
-    name: "SimBank",
-    note: "An online banking simulator with JWT authentication",
-    stack: "Spring Boot, PostgreSQL",
-    image: simbank,
-    url: "https://github.com/diti85/SimBank",
+    name: "Momentum Real Estate Group",
+    kind: "Boutique brokerage, the Palm Beaches to Miami",
+    note: "Live listing search, new construction, and guides for buyers and sellers.",
+    image: momentum,
+    url: "https://momentumregroup.com",
+    urlLabel: "momentumregroup.com",
   },
   {
-    year: "2023",
-    name: "Date Night",
-    note: "Settles the “where should we eat?” question for two",
-    stack: "React, Express, MongoDB",
-    image: datenight,
-    url: "https://github.com/diti85/date-night",
+    name: "DRSA",
+    kind: "Marine LED lighting, since 1988",
+    note: "An online store for marine-grade lighting, with a dock lighting configurator and dealer pages.",
+    image: drsa,
+    url: "https://www.drsa.com",
+    urlLabel: "drsa.com",
   },
   {
-    year: "2023",
-    name: "Reactique",
-    note: "An e-commerce storefront with auth, cart and categories",
-    stack: "React, Redux, Express",
-    image: reactique,
-    url: "https://github.com/diti85/Reactique",
+    name: "Marine Plumbing Co.",
+    kind: "Marine parts and dockside service, Lake Park",
+    note: "Online store, service booking and remote support for boaters across South Florida.",
+    image: marine,
+    url: "http://marineplumbingcompany.com",
+    urlLabel: "marineplumbingcompany.com",
   },
 ];
 
