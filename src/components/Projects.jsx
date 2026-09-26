@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import { clientSites, projects } from "../data/content";
-import { lockScroll } from "../lib/scroll";
+import { lockScroll, scrollToId } from "../lib/scroll";
+import SectionHead from "./SectionHead";
 import { useMediaQuery } from "../lib/useInView";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -35,6 +36,9 @@ function Feature({ project, onOpen }) {
     <article className="group grid gap-8 border-t border-bone/10 py-12 md:py-16 lg:grid-cols-12 lg:gap-12">
       <div className="flex flex-col lg:col-span-5">
         <p className="text-xs text-moss">
+          <span className="mr-3 inline-flex rounded-full border border-brass/40 px-2.5 py-0.5 text-2xs text-gilt">
+            {project.tag}
+          </span>
           <span className="figures">{project.years}</span>
           <span className="mx-2 text-bone/20">/</span>
           {project.role}
@@ -166,6 +170,9 @@ function CaseStudy({ project, onClose }) {
 
         <div className="px-6 pb-20 pt-10 md:px-12">
           <p className="text-xs text-moss">
+            <span className="mr-3 inline-flex rounded-full border border-brass/40 px-2.5 py-0.5 text-2xs text-gilt">
+              {project.tag}
+            </span>
             <span className="figures">{project.years}</span>
             <span className="mx-2 text-bone/20">/</span>
             {project.role}
@@ -205,6 +212,9 @@ function CaseStudy({ project, onClose }) {
             </figure>
           ))}
 
+          <h3 className="display mt-12 text-2xl">Where it stands</h3>
+          <p className="mt-4 max-w-[62ch] text-base">{project.outcome}</p>
+
           <h3 className="display mt-12 text-2xl">Built with</h3>
           <p className="mt-4 text-base">{project.stack.join(", ")}</p>
 
@@ -236,6 +246,7 @@ function ClientSites() {
 
   return (
     <div
+      id="clients"
       className="relative mt-24 md:mt-32"
       onPointerMove={(e) => {
         x.set(e.clientX + 28);
@@ -284,6 +295,20 @@ function ClientSites() {
           </li>
         ))}
       </ul>
+      <p className="mt-8 text-sm text-moss">
+        Need a website for your business?{" "}
+        <a
+          href="#contact"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToId("contact");
+          }}
+          className="thread-link text-gilt"
+        >
+          Let&rsquo;s talk about it
+        </a>
+        .
+      </p>
 
       {fine && (
         <AnimatePresence>
@@ -315,8 +340,9 @@ export default function Projects() {
   const [open, setOpen] = useState(null);
   const close = useCallback(() => setOpen(null), []);
   return (
-    <section id="projects" aria-labelledby="projects-title" className="relative pt-28 md:pt-40">
-      <div className="frame">
+    <section id="projects" aria-labelledby="projects-title" className="relative pt-24 md:pt-36">
+      <SectionHead label="Projects" note="Independent work: products, a nonprofit and clients" />
+      <div className="frame mt-12 md:mt-16">
         <div className="grid gap-8 lg:grid-cols-12">
           <h2
             id="projects-title"

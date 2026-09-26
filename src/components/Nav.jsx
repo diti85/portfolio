@@ -43,12 +43,16 @@ export default function Nav({ onOpenPalette }) {
         }`}
       >
         <div className="frame flex h-16 items-center justify-between gap-6">
-          <a
-            href="#top"
-            onClick={go("top")}
-            className="display relative z-10 text-lg tracking-normal"
-          >
-            Endrit Basha
+          <a href="#top" onClick={go("top")} className="relative z-10 flex items-baseline gap-3">
+            <span className="display text-lg tracking-normal">Endrit Basha</span>
+            {/* once the hero is gone, keep who-and-where in view */}
+            <span
+              className={`hidden text-2xs text-moss transition-opacity duration-500 lg:inline ${
+                scrolled ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              Software engineer at GEICO
+            </span>
           </a>
 
           <nav aria-label="Sections" className="hidden md:block">

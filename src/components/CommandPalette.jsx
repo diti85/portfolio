@@ -19,6 +19,7 @@ function useCommands(close) {
       ...nav.map((n) => ({
         group: "Go to",
         label: n.label,
+        hint: n.hint,
         run: () => scrollToId(n.id),
       })),
       {

@@ -31,11 +31,71 @@ export const profile = {
 };
 
 export const nav = [
-  { id: "systems", label: "Systems" },
-  { id: "projects", label: "Projects" },
-  { id: "experience", label: "Experience" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
+  { id: "about", label: "About", hint: "Who I am and what I do" },
+  { id: "work", label: "Work", hint: "Data engineering at GEICO" },
+  { id: "experience", label: "Experience", hint: "Timeline, toolkit, résumé" },
+  { id: "projects", label: "Projects", hint: "OneAMS, AIP, client websites" },
+  { id: "contact", label: "Contact", hint: "Email and form" },
+];
+
+// The introduction right after the hero.
+export const intro = {
+  headline: "I’m a software engineer on GEICO’s Data Engineering team.",
+  lead: "I design the systems that move, watch and protect the company’s data. On my own time I build products and websites for startups, small businesses and nonprofits.",
+  now: "Software Engineer II, GEICO",
+  before: "Full-stack engineer, Wizard Studios",
+  studying: "M.S. Computer Science, UIUC",
+  pillars: [
+    {
+      title: "Data platforms at scale",
+      body: "Ingestion services that carry tens of millions of messages a day from dozens of sources, without dropping one.",
+      link: { href: "#ingestion", label: "See the ingestion work" },
+    },
+    {
+      title: "Reliability you can see",
+      body: "Health checks that trace a failure to its source and flag every report it affects, before anyone opens a stale dashboard.",
+      link: { href: "#observability", label: "Try the health engine" },
+    },
+    {
+      title: "Products and websites",
+      body: "A membership platform for associations, a market-intelligence engine, and sites for small businesses and nonprofits.",
+      link: { href: "#projects", label: "Browse the projects" },
+    },
+  ],
+  glance: [
+    { value: "30M+", label: "messages a day through a service I architected" },
+    { value: "33", label: "enterprise data sources onboarded" },
+    { value: "$150K", label: "vendor dependency retired" },
+    { value: "5+", label: "years shipping production software" },
+  ],
+};
+
+// The three chapters of the GEICO section, in reading order.
+export const workChapters = [
+  {
+    id: "ingestion",
+    numeral: "I",
+    name: "Ingestion",
+    outcome: "Streams 30M+ messages a day from 33 sources into Cosmos DB and Snowflake.",
+  },
+  {
+    id: "observability",
+    numeral: "II",
+    name: "Observability",
+    outcome: "Traces failures through data lineage to the Power BI reports they affect.",
+  },
+  {
+    id: "retention",
+    numeral: "III",
+    name: "Retention",
+    outcome:
+      "Automates policy-based deletion: 75% less audit risk, 40% lower projected storage costs.",
+  },
+];
+
+export const alsoAtWork = [
+  "Replaced a legacy translation system with a custom Go service, retiring a $150K vendor dependency.",
+  "Selected as a TDP peer mentor for new engineers, with a 90%+ onboarding satisfaction rate.",
 ];
 
 // 30M+ messages/day, the ingestion service's documented volume.
@@ -112,6 +172,8 @@ export const lineage = {
 export const projects = [
   {
     id: "oneams",
+    tag: "Own product",
+    outcome: "In production since September 2026.",
     name: "OneAMS",
     years: "2026",
     role: "Founder and engineer",
@@ -154,6 +216,8 @@ export const projects = [
   },
   {
     id: "aip",
+    tag: "Own product",
+    outcome: "Live, mapping more than 100,000 associations, with subscriber tiers.",
     name: "AIP",
     fullName: "Association Intelligence Platform",
     years: "2026",
@@ -185,6 +249,9 @@ export const projects = [
   },
   {
     id: "ymod",
+    tag: "Nonprofit",
+    outcome:
+      "Back online at youngpeopleofdistinction.org and handed off to the team with documentation.",
     name: "Young Men of Distinction",
     years: "2026",
     role: "Volunteer engineer, via Catchafire",
@@ -215,6 +282,8 @@ export const projects = [
   },
   {
     id: "sunrise",
+    tag: "Client",
+    outcome: "Live at sunriseprishtina.com.",
     name: "Sunrise Apartments",
     years: "2026",
     role: "Design and engineering",
@@ -247,6 +316,8 @@ export const projects = [
   },
   {
     id: "basha",
+    tag: "Client",
+    outcome: "Live at bashamanagement.com, with a companion bookkeeping page.",
     name: "Basha Management",
     years: "2025–2026",
     role: "Engineering",
@@ -369,15 +440,6 @@ export const timeline = [
   },
 ];
 
-export const ledger = [
-  { label: "Messages ingested per day", value: "30M+" },
-  { label: "Enterprise data sources onboarded", value: "33" },
-  { label: "Vendor contract retired", value: "$150K" },
-  { label: "Audit risk reduced", value: "75%" },
-  { label: "Projected storage costs cut", value: "40%" },
-  { label: "Peer-mentoring satisfaction", value: "90%+" },
-];
-
 export const capabilities = [
   {
     group: "Languages",
@@ -399,8 +461,9 @@ export const capabilities = [
 ];
 
 export const credentials = [
-  { name: "AWS Certified Cloud Practitioner", kind: "Certification" },
-  { name: "TestOut CyberDefense Pro", kind: "Certification" },
-  { name: "Florida Academic Scholars Award", kind: "Award" },
-  { name: "TDP Peer Mentor, GEICO", kind: "Selection" },
+  { name: "M.S. Computer Science, University of Illinois", detail: "Expected Dec 2027" },
+  { name: "B.S. Computer Science, University of Central Florida", detail: "Dec 2023" },
+  { name: "AWS Certified Cloud Practitioner", detail: "Certification" },
+  { name: "TestOut CyberDefense Pro", detail: "Certification" },
+  { name: "Florida Academic Scholars Award", detail: "Full funding toward the B.S." },
 ];

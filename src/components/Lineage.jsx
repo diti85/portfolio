@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { lineage } from "../data/content";
 import { useMediaQuery } from "../lib/useInView";
+import { ChapterMark } from "./SectionHead";
 
 const EASE = [0.22, 1, 0.36, 1];
 const STEP_MS = 320; // how long the failure takes to travel one hop downstream
@@ -79,21 +80,26 @@ export default function Lineage() {
   };
 
   return (
-    <section aria-labelledby="lineage-title" className="relative pb-10 pt-24 md:pt-36">
+    <section
+      id="observability"
+      aria-labelledby="lineage-title"
+      className="relative pb-10 pt-24 md:pt-36"
+    >
       <div className="frame grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <h2
+          <ChapterMark numeral="II" name="Observability" />
+          <h3
             id="lineage-title"
-            className="display text-[clamp(2.5rem,5.6vw,5rem)] leading-[0.95] tracking-[-0.025em]"
+            className="display mt-4 text-[clamp(2.5rem,5.6vw,5rem)] leading-[0.95] tracking-[-0.025em]"
           >
             When something breaks, know what it breaks.
-          </h2>
+          </h3>
         </div>
         <div className="flex flex-col justify-end gap-4 lg:col-span-6 lg:col-start-7">
           <p className="max-w-[56ch] text-base md:text-lg">
-            I also built the observability platform that watches those pipelines. Its health engine
-            walks the data lineage, so a failure is traced to its source and every report downstream
-            of it is flagged before anyone opens a stale dashboard.
+            I built the observability platform that watches those pipelines. Its health engine walks
+            the data lineage, so a failure is traced to its source and every report downstream of it
+            is flagged before anyone opens a stale dashboard.
           </p>
           <p className="text-sm text-moss">
             Try it: select any node to break it. The names are made up; the mechanics are the real

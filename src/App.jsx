@@ -2,8 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { MotionConfig, useReducedMotion } from "motion/react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Pipeline from "./components/Pipeline";
-import Lineage from "./components/Lineage";
+import Work from "./components/Work";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import About from "./components/About";
@@ -38,7 +37,7 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <a
-        href="#systems"
+        href="#about"
         className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-full bg-gilt px-4 py-2 text-sm text-lacquer focus:translate-y-0"
       >
         Skip to content
@@ -46,11 +45,10 @@ export default function App() {
       <Nav onOpenPalette={() => setPalette(true)} />
       <main>
         <Hero />
-        <Pipeline />
-        <Lineage />
-        <Projects />
-        <Experience />
         <About />
+        <Work />
+        <Experience />
+        <Projects />
         <Contact />
       </main>
       <Footer />

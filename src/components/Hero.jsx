@@ -96,25 +96,16 @@ export default function Hero() {
         <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-12 md:items-end">
           <motion.p
             {...fade(1.25)}
-            className="max-w-[34ch] text-lg leading-snug text-bone/90 md:col-span-5 md:text-xl"
+            className="max-w-[40ch] text-lg leading-snug md:col-span-7 md:text-xl"
           >
-            I build data platforms that move millions of records a day, and the tools that say, in
-            real time, when something breaks.
+            <span className="text-bone">Software engineer at GEICO.</span>{" "}
+            <span className="text-bone/70">
+              I build data platforms that move millions of records a day, and the tools that say, in
+              real time, when something breaks.
+            </span>
           </motion.p>
 
-          <motion.dl {...fade(1.4)} className="grid gap-3 text-xs md:col-span-3 md:col-start-7">
-            <div>
-              <dt className="sr-only">Role</dt>
-              <dd className="text-bone">{profile.role}</dd>
-              <dd>{profile.team}</dd>
-            </div>
-            <div>
-              <dt className="sr-only">Study</dt>
-              <dd>{profile.study}</dd>
-            </div>
-          </motion.dl>
-
-          <motion.p {...fade(1.55)} className="text-xs md:col-span-3 md:col-start-10 md:text-right">
+          <motion.p {...fade(1.5)} className="text-xs md:col-span-3 md:col-start-10 md:text-right">
             <span className="display block text-2xl text-gilt md:text-3xl">
               <Counter />
             </span>

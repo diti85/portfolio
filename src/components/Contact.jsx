@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { profile } from "../data/content";
+import SectionHead from "./SectionHead";
 
 const field =
   "w-full border-0 border-b border-bone/15 bg-transparent px-0 py-3 text-base text-bone placeholder:text-moss/70 transition-colors focus:border-gilt focus:outline-none focus:ring-0";
@@ -67,9 +68,10 @@ export default function Contact() {
     <section
       id="contact"
       aria-labelledby="contact-title"
-      className="relative pb-24 pt-28 md:pb-32 md:pt-44"
+      className="relative pb-24 pt-24 md:pb-32 md:pt-36"
     >
-      <div className="frame">
+      <SectionHead label="Contact" note="Hiring, projects or partnerships" />
+      <div className="frame mt-12 md:mt-16">
         <h2
           id="contact-title"
           className="display text-[clamp(4rem,14vw,12.5rem)] leading-[0.86] tracking-[-0.035em]"
@@ -79,9 +81,10 @@ export default function Contact() {
 
         <div className="mt-14 grid gap-16 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <p className="max-w-[40ch] text-base md:text-lg">
-              Whether it&rsquo;s a role, a project, or a question about something on this page,
-              write to me directly or use the form.
+            <h3 className="display text-2xl md:text-3xl">Hiring</h3>
+            <p className="mt-3 max-w-[40ch] text-base md:text-lg">
+              Recruiters and hiring managers: the résumé and LinkedIn have the full history, and
+              email reaches me directly.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
@@ -102,9 +105,9 @@ export default function Contact() {
 
             <ul className="mt-10 flex flex-col border-t border-bone/10 text-sm">
               {[
+                ["Résumé", profile.resume, "PDF, one page"],
                 ["LinkedIn", profile.links.linkedin, "linkedin.com/in/endritbasha"],
                 ["GitHub", profile.links.github, "github.com/diti85"],
-                ["Résumé", profile.resume, "PDF, one page"],
               ].map(([label, href, note]) => (
                 <li key={label} className="border-b border-bone/10">
                   <a
@@ -128,6 +131,13 @@ export default function Contact() {
           </div>
 
           <form onSubmit={onSubmit} className="flex flex-col gap-8 lg:col-span-6 lg:col-start-7">
+            <div>
+              <h3 className="display text-2xl md:text-3xl">Projects and partnerships</h3>
+              <p className="mt-3 max-w-[46ch] text-base md:text-lg">
+                A website for your business, a product idea, or a question about something on this
+                page. Tell me a little about it.
+              </p>
+            </div>
             <label className="flex flex-col gap-1">
               <span className="text-xs text-moss">Your name</span>
               <input

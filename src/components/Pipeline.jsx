@@ -3,6 +3,7 @@ import { useReducedMotion } from "motion/react";
 import { createPipelineSim } from "./pipeline/sim";
 import { useVisibility } from "../lib/useInView";
 import { pipelineSteps } from "../data/content";
+import { ChapterMark } from "./SectionHead";
 
 const NUMERALS = ["I", "II", "III", "IV"];
 const fmt = new Intl.NumberFormat("en-US");
@@ -79,18 +80,19 @@ export default function Pipeline() {
   const key = pipelineSteps[active].readout;
 
   return (
-    <section id="systems" aria-labelledby="systems-title" className="relative pt-28 md:pt-40">
+    <section id="ingestion" aria-labelledby="ingestion-title" className="relative pt-24 md:pt-36">
       <div className="frame">
-        <h2
-          id="systems-title"
-          className="display max-w-[12ch] text-[clamp(3rem,8.4vw,8rem)] leading-[0.9] tracking-[-0.03em]"
+        <ChapterMark numeral="I" name="Ingestion" />
+        <h3
+          id="ingestion-title"
+          className="display mt-4 max-w-[12ch] text-[clamp(3rem,8.4vw,8rem)] leading-[0.9] tracking-[-0.03em]"
         >
           Thirty million messages a day.
-        </h2>
+        </h3>
         <p className="mt-8 max-w-[58ch] text-base md:mt-10 md:text-lg">
-          At GEICO I architected the ingestion service that carries data from 33 enterprise sources
-          into the stores the company&rsquo;s analytics are built on. Below is a working model of
-          how it keeps up. Scroll to step through it.
+          I architected the ingestion service that carries data from 33 enterprise sources into the
+          stores the company&rsquo;s analytics are built on. Below is a working model of how it
+          keeps up. Scroll to step through it.
         </p>
       </div>
 
@@ -143,7 +145,7 @@ export default function Pipeline() {
                 <p className="display text-lg italic text-brass" aria-hidden="true">
                   {NUMERALS[i]}
                 </p>
-                <h3 className="display mt-3 text-3xl md:text-4xl">{s.title}</h3>
+                <h4 className="display mt-3 text-3xl md:text-4xl">{s.title}</h4>
                 <p className="mt-5 max-w-[40ch] text-base">{s.body}</p>
               </div>
             </li>

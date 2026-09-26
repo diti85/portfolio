@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
-import { ledger, timeline } from "../data/content";
+import { capabilities, credentials, profile, timeline } from "../data/content";
+import SectionHead from "./SectionHead";
 import { useMediaQuery } from "../lib/useInView";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -132,8 +133,9 @@ export default function Experience() {
   const todayF = frac(TODAY);
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="relative pt-28 md:pt-40">
-      <div className="frame">
+    <section id="experience" aria-labelledby="experience-title" className="relative pt-24 md:pt-36">
+      <SectionHead label="Experience" note="Roles, education, toolkit and résumé" />
+      <div className="frame mt-12 md:mt-16">
         <div className="grid gap-8 lg:grid-cols-12">
           <h2
             id="experience-title"
@@ -230,26 +232,54 @@ export default function Experience() {
           </AnimatePresence>
         </div>
 
-        {/* ledger */}
+        {/* toolkit: where technology names belong */}
         <div className="mt-24 grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <h3 className="display text-3xl md:text-4xl">In figures</h3>
+            <h3 className="display text-3xl md:text-4xl">Toolkit</h3>
             <p className="mt-3 max-w-[36ch] text-sm text-moss">
-              Outcomes from my work at GEICO, as they appear on my résumé.
+              What I reach for, grouped by where it sits in a system.
             </p>
           </div>
-          <dl className="grid gap-x-12 lg:col-span-8 md:grid-cols-2">
-            {ledger.map((row) => (
+          <dl className="lg:col-span-8">
+            {capabilities.map((c) => (
               <div
-                key={row.label}
-                className="flex items-baseline gap-3 border-b border-bone/[0.07] py-4"
+                key={c.group}
+                className="grid gap-1 border-b border-bone/[0.07] py-4 md:grid-cols-[14rem_1fr] md:gap-6"
               >
-                <dt className="text-sm">{row.label}</dt>
-                <span className="leader" aria-hidden="true" />
-                <dd className="display figures text-2xl text-bone md:text-3xl">{row.value}</dd>
+                <dt className="display text-xl text-bone">{c.group}</dt>
+                <dd className="text-sm leading-relaxed md:self-center">{c.items.join(", ")}</dd>
               </div>
             ))}
           </dl>
+        </div>
+
+        {/* education and credentials, then the résumé */}
+        <div className="mt-20 grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <h3 className="display text-3xl md:text-4xl">Education and credentials</h3>
+          </div>
+          <div className="lg:col-span-8">
+            <dl>
+              {credentials.map((c) => (
+                <div
+                  key={c.name}
+                  className="flex items-baseline gap-3 border-b border-bone/[0.07] py-4"
+                >
+                  <dt className="text-sm text-bone">{c.name}</dt>
+                  <span className="leader" aria-hidden="true" />
+                  <dd className="text-right text-xs text-moss">{c.detail}</dd>
+                </div>
+              ))}
+            </dl>
+            <a
+              href={profile.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-10 inline-flex h-11 items-center rounded-full bg-gilt px-6 text-sm text-lacquer transition-colors hover:bg-bone"
+            >
+              Download the full résumé (PDF)
+            </a>
+          </div>
         </div>
       </div>
     </section>

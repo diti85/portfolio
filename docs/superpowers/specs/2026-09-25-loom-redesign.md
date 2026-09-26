@@ -43,9 +43,25 @@ labels. No monospace, no all-caps labels, and no eyebrows above headings.
 
 ## Sections
 
-Hero (loom), Systems (pipeline scrollytelling and lineage demo), Projects (features with case
-study drawer, and an archive), Experience (thread timeline, details and ledger), About, Contact,
-Footer. The global ⌘K command menu and the pointer companion are available throughout.
+Revised 2026-09-26 after Endrit's feedback that the page jumped from his name straight into GEICO
+internals. A research pass over portfolios such as Brittany Chiang's, Lee Robinson's and Emil
+Kowalski's, plus recruiter eye-tracking and hiring-manager sources, found three things. Visitors
+look for name, current title and employer first. Most attention goes to the first two screens.
+Employer work and side projects are kept apart. The page now reads:
+
+1. Hero: name, "Software engineer at GEICO.", the high-level tagline, the counter.
+2. About: portrait, bio, now / before / studying, three "what I do" pillars that link into the
+   page, four numbers at a glance, and résumé and contact buttons.
+3. Work: context first ("Data engineering at GEICO", role, dates, a no-GEICO-data note), a
+   chapter index, then I Ingestion, II Observability, III Retention, and "Also at GEICO".
+4. Experience: timeline, toolkit (where technology names live), education and credentials,
+   and the résumé.
+5. Projects: tagged features with case studies (problem, what I built, where it stands, stack),
+   then client websites with a call to action for businesses.
+6. Contact: hiring on one side, projects and partnerships on the other.
+
+Every section opens with a running header: label on the left, contents on the right. Chapters
+are numbered because they are read in order. Sections are not numbered.
 
 ## Project selection
 
