@@ -8,7 +8,8 @@ visualizations and animations, and more current projects.
 
 ## Concept
 
-The subject is a data engineer whose headline work is an ingestion service: 33 enterprise
+The subject is a software engineer who loves building software that solves real problems. His
+headline work at GEICO is an ingestion service: 33 enterprise
 sources converge through one service into two stores, at more than 30M messages a day. The
 visual language comes from that: **threads converging through a single eye and braiding out
 again**. Luxury is expressed with materials rather than ornament: lacquer green, brass hairlines
@@ -52,8 +53,9 @@ Employer work and side projects are kept apart. The page now reads:
 1. Hero: name, "Software engineer at GEICO.", the high-level tagline, the counter.
 2. About: portrait, bio, now / before / studying, three "what I do" pillars that link into the
    page, four numbers at a glance, and résumé and contact buttons.
-3. Work: context first ("Data engineering at GEICO", role, dates, a no-GEICO-data note), a
+3. Work: context first ("Problems I solve at GEICO", role, dates, a no-GEICO-data note), a
    chapter index, then I Ingestion, II Observability, III Retention, and "Also at GEICO".
+   Every chapter is told problem first: "The problem", then "What I built".
 4. Experience: timeline, toolkit (where technology names live), education and credentials,
    and the résumé.
 5. Projects: tagged features with case studies (problem, what I built, where it stands, stack),
@@ -77,3 +79,10 @@ Chosen from a survey of `~/Documents/Repos` on 2026-09-25, then revised with End
 - Client websites, replacing the old archive of university projects: La Fogata, La Bamba,
   Momentum Real Estate Group, DRSA and Marine Plumbing Co. Screenshots were taken from the live
   sites on 2026-09-26.
+
+## Positioning (2026-09-26)
+
+Endrit is not a "data engineer". The through-line is building software that solves real
+problems. The hero states it, the About pillars group the evidence by where the problems come
+from (GEICO, his own products, businesses and nonprofits), and each GEICO chapter opens with
+the problem. His GEICO team is now called Enterprise Data (formerly Data Engineering).

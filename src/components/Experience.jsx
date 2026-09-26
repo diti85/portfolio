@@ -144,8 +144,8 @@ export default function Experience() {
             Experience.
           </h2>
           <p className="max-w-[46ch] self-end text-base md:text-lg lg:col-span-4 lg:col-start-9">
-            From full-stack client work at a small studio to the data platforms behind one of the
-            largest auto insurers in the U.S. Select a thread for the details.
+            From client projects at a small studio to the systems behind one of the largest auto
+            insurers in the U.S. Select a thread for the details.
           </p>
         </div>
 

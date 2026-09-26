@@ -16,14 +16,15 @@ export default function Work() {
           id="work-title"
           className="display text-[clamp(3rem,7.4vw,7rem)] leading-[0.9] tracking-[-0.03em] lg:col-span-6"
         >
-          Data engineering at GEICO.
+          Problems I solve at GEICO.
         </h2>
         <div className="flex flex-col gap-4 self-end lg:col-span-5 lg:col-start-8">
           <p className="max-w-[56ch] text-base md:text-lg">
-            Since March 2024 I&rsquo;ve worked on GEICO&rsquo;s Data Engineering team, and I was
-            promoted to Software Engineer II in July 2025. I architected the ingestion service that
-            feeds the company&rsquo;s analytics, built the observability platform that watches it,
-            and led a data retention platform for regulatory compliance.
+            Since March 2024 I&rsquo;ve been a software engineer on GEICO&rsquo;s Enterprise Data
+            team, and a Software Engineer II since July 2025. The problems change, but they share a
+            theme: the company runs on its data, so that data has to arrive, be trustworthy, and be
+            deleted when the law says so. Each chapter starts with the problem, then shows what I
+            built.
           </p>
           <p className="text-sm text-moss">
             The models below illustrate how each system works. They contain no GEICO data.
@@ -46,7 +47,7 @@ export default function Work() {
                 <span className="display text-lg italic text-brass">{c.numeral}</span>
                 <span className="display text-2xl text-bone md:text-3xl">{c.name}</span>
               </span>
-              <span className="text-sm">{c.outcome}</span>
+              <span className="text-sm">{c.summary}</span>
               <span className="mt-auto pt-2 text-xs text-gilt transition-transform duration-500 group-hover:translate-x-1">
                 Read the chapter
               </span>

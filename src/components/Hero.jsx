@@ -100,8 +100,7 @@ export default function Hero() {
           >
             <span className="text-bone">Software engineer at GEICO.</span>{" "}
             <span className="text-bone/70">
-              I build data platforms that move millions of records a day, and the tools that say, in
-              real time, when something breaks.
+              I love building software that solves real problems.
             </span>
           </motion.p>
 

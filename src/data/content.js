@@ -18,7 +18,7 @@ import marine from "../assets/sites/marine.webp";
 export const profile = {
   name: "Endrit Basha",
   role: "Software Engineer II",
-  team: "Data Engineering at GEICO",
+  team: "Enterprise Data at GEICO",
   study: "M.S. Computer Science, University of Illinois",
   location: "Florida",
   timeZone: "America/New_York",
@@ -32,70 +32,87 @@ export const profile = {
 
 export const nav = [
   { id: "about", label: "About", hint: "Who I am and what I do" },
-  { id: "work", label: "Work", hint: "Data engineering at GEICO" },
+  { id: "work", label: "Work", hint: "Problems I solve at GEICO" },
   { id: "experience", label: "Experience", hint: "Timeline, toolkit, résumé" },
   { id: "projects", label: "Projects", hint: "OneAMS, AIP, client websites" },
   { id: "contact", label: "Contact", hint: "Email and form" },
 ];
 
-// The introduction right after the hero.
+// The introduction right after the hero. The through-line is solving real
+// problems; data systems are one place that happens, not the identity.
 export const intro = {
-  headline: "I’m a software engineer on GEICO’s Data Engineering team.",
-  lead: "I design the systems that move, watch and protect the company’s data. On my own time I build products and websites for startups, small businesses and nonprofits.",
+  headline: "I start with the problem, then build what fixes it.",
+  lead: "I’m a software engineer at GEICO, on the Enterprise Data team. Outside work I build products and websites for founders, small businesses and nonprofits.",
   now: "Software Engineer II, GEICO",
   before: "Full-stack engineer, Wizard Studios",
   studying: "M.S. Computer Science, UIUC",
+  // Three places the problems come from, each linking to the evidence.
   pillars: [
     {
-      title: "Data platforms at scale",
-      body: "Ingestion services that carry tens of millions of messages a day from dozens of sources, without dropping one.",
-      link: { href: "#ingestion", label: "See the ingestion work" },
+      context: "At GEICO",
+      title: "Keeping a company’s data moving, visible and compliant.",
+      body: "Data from thirty-three systems that analytics teams depend on, failures that would otherwise surface as stale reports, and records the law says must be deleted on time. I build the software that handles all three.",
+      link: { href: "#work", label: "See the work" },
     },
     {
-      title: "Reliability you can see",
-      body: "Health checks that trace a failure to its source and flag every report it affects, before anyone opens a stale dashboard.",
-      link: { href: "#observability", label: "Try the health engine" },
+      context: "My own products",
+      title: "Taking an idea from first commit to production.",
+      body: "OneAMS gives volunteer-run associations one place to run members, dues and events. AIP finds the associations that need it. I designed, built and launched both.",
+      link: { href: "#projects", label: "See the products" },
     },
     {
-      title: "Products and websites",
-      body: "A membership platform for associations, a market-intelligence engine, and sites for small businesses and nonprofits.",
-      link: { href: "#projects", label: "Browse the projects" },
+      context: "For businesses and nonprofits",
+      title: "Giving small teams websites that do real work.",
+      body: "Online ordering for family restaurants, listing search for a brokerage, a store for a marine supplier, and a nonprofit’s website brought back from the archives.",
+      link: { href: "#clients", label: "See the websites" },
     },
   ],
   glance: [
-    { value: "30M+", label: "messages a day through a service I architected" },
-    { value: "33", label: "enterprise data sources onboarded" },
-    { value: "$150K", label: "vendor dependency retired" },
     { value: "5+", label: "years shipping production software" },
+    { value: "30M+", label: "messages a day through a service I architected" },
+    { value: "$150K", label: "vendor dependency retired at GEICO" },
+    { value: "2", label: "products I designed, built and launched" },
   ],
 };
 
-// The three chapters of the GEICO section, in reading order.
+// The three chapters of the GEICO section, in reading order. Each one is told
+// problem first: what was wrong, what I built, and what changed.
 export const workChapters = [
   {
     id: "ingestion",
     numeral: "I",
     name: "Ingestion",
-    outcome: "Streams 30M+ messages a day from 33 sources into Cosmos DB and Snowflake.",
+    summary: "Getting data from 33 systems to where it’s needed, at 30M+ messages a day.",
+    problem:
+      "Thirty-three enterprise systems publish data around the clock, each at its own pace. Analytics teams needed all of it, in two different stores, quickly and without gaps.",
+    solution:
+      "I architected an ingestion service that streams it from Service Bus topics into Cosmos DB and Snowflake, adapting to load as it goes. It reliably handles more than thirty million messages a day.",
   },
   {
     id: "observability",
     numeral: "II",
     name: "Observability",
-    outcome: "Traces failures through data lineage to the Power BI reports they affect.",
+    summary: "Finding the cause of a failure before anyone trusts a stale report.",
+    problem:
+      "When something failed upstream, the damage showed up downstream as stale Power BI reports, and tracing it back to the cause took time.",
+    solution:
+      "I built a data observability platform whose health engine walks data lineage: it finds where a failure started and flags every report it affects, so teams resolve incidents faster.",
   },
   {
     id: "retention",
     numeral: "III",
     name: "Retention",
-    outcome:
-      "Automates policy-based deletion: 75% less audit risk, 40% lower projected storage costs.",
+    summary: "Deleting data when the law says to: 75% less audit risk.",
+    problem:
+      "New York’s financial regulator requires data to be deleted once its retention period ends. At GEICO’s scale, that has to happen automatically, reliably and on schedule.",
+    solution:
+      "I led a fault-tolerant retention platform that gives every record a policy and deletes it through orchestrated workflows when its window closes.",
   },
 ];
 
 export const alsoAtWork = [
-  "Replaced a legacy translation system with a custom Go service, retiring a $150K vendor dependency.",
-  "Selected as a TDP peer mentor for new engineers, with a 90%+ onboarding satisfaction rate.",
+  "A legacy translation system tied the team to a $150K vendor contract. I replaced it with a custom Go service.",
+  "New engineers needed a faster start. As a TDP peer mentor I helped onboard them, with a 90%+ satisfaction rate.",
 ];
 
 // 30M+ messages/day, the ingestion service's documented volume.
@@ -414,7 +431,7 @@ export const timeline = [
   {
     id: "geico",
     org: "GEICO",
-    title: "Software Engineer I → II, Data Engineering",
+    title: "Software Engineer I → II, Enterprise Data",
     place: "Remote",
     start: [2024, 3],
     end: null,

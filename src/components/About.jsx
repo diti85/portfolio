@@ -52,11 +52,12 @@ export default function About() {
             {intro.lead}
           </p>
           <p className="mt-6 max-w-[62ch] text-base md:text-lg">
-            I like problems where reliability is the product: pipelines that can&rsquo;t drop a
-            message, retention that regulators audit, and monitoring that says what broke before
-            anyone has to ask. I&rsquo;m studying part-time for a master&rsquo;s in computer science
-            at the University of Illinois, and before GEICO I spent three years shipping client
-            projects at Wizard Studios.
+            Sometimes the fix is a service that handles thirty million messages a day. Sometimes
+            it&rsquo;s a website that lets a family restaurant take orders online. Either way I care
+            about who&rsquo;s stuck and what &ldquo;solved&rdquo; looks like for them. I&rsquo;m
+            studying part-time for a master&rsquo;s in computer science at the University of
+            Illinois, and before GEICO I spent three years shipping client projects at Wizard
+            Studios.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -93,7 +94,8 @@ export default function About() {
       <div className="frame mt-20 grid gap-10 md:mt-28 md:grid-cols-3 md:gap-8">
         {intro.pillars.map((p) => (
           <div key={p.title} className="flex flex-col border-t border-brass/40 pt-5">
-            <h3 className="display text-2xl md:text-3xl">{p.title}</h3>
+            <p className="text-xs text-gilt">{p.context}</p>
+            <h3 className="display mt-3 text-2xl leading-tight md:text-[1.75rem]">{p.title}</h3>
             <p className="mt-3 max-w-[38ch] text-base">{p.body}</p>
             <a
               href={p.link.href}

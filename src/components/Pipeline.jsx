@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { createPipelineSim } from "./pipeline/sim";
 import { useVisibility } from "../lib/useInView";
-import { pipelineSteps } from "../data/content";
-import { ChapterMark } from "./SectionHead";
+import { pipelineSteps, workChapters } from "../data/content";
+import { ChapterMark, ProblemSolution } from "./SectionHead";
+
+const chapter = workChapters[0];
 
 const NUMERALS = ["I", "II", "III", "IV"];
 const fmt = new Intl.NumberFormat("en-US");
@@ -89,10 +91,13 @@ export default function Pipeline() {
         >
           Thirty million messages a day.
         </h3>
-        <p className="mt-8 max-w-[58ch] text-base md:mt-10 md:text-lg">
-          I architected the ingestion service that carries data from 33 enterprise sources into the
-          stores the company&rsquo;s analytics are built on. Below is a working model of how it
-          keeps up. Scroll to step through it.
+        <ProblemSolution
+          problem={chapter.problem}
+          solution={chapter.solution}
+          className="mt-10 md:mt-12 md:grid-cols-2 md:gap-12"
+        />
+        <p className="mt-8 text-sm text-moss">
+          Below is a working model of how it keeps up. Scroll to step through it.
         </p>
       </div>
 

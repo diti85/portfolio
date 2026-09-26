@@ -20,3 +20,19 @@ export function ChapterMark({ numeral, name }) {
     </p>
   );
 }
+
+// Every piece of professional work is told problem first.
+export function ProblemSolution({ problem, solution, className = "" }) {
+  return (
+    <dl className={`grid gap-6 ${className}`}>
+      <div>
+        <dt className="text-xs text-moss">The problem</dt>
+        <dd className="mt-2 max-w-[56ch] text-base text-bone/85 md:text-lg">{problem}</dd>
+      </div>
+      <div>
+        <dt className="text-xs text-gilt">What I built</dt>
+        <dd className="mt-2 max-w-[56ch] text-base md:text-lg">{solution}</dd>
+      </div>
+    </dl>
+  );
+}

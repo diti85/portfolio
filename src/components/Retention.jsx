@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { createRetentionSim } from "./retention/sim";
-import { ChapterMark } from "./SectionHead";
+import { ChapterMark, ProblemSolution } from "./SectionHead";
+import { workChapters } from "../data/content";
 import { useVisibility } from "../lib/useInView";
+
+const chapter = workChapters[2];
 
 const fmt = new Intl.NumberFormat("en-US");
 
@@ -52,11 +55,7 @@ export default function Retention() {
           >
             Deleted on schedule.
           </h3>
-          <p className="mt-8 max-w-[52ch] text-base md:text-lg">
-            I led a fault-tolerant data retention platform aligned with New York DFS requirements.
-            Every record carries a retention policy, and when its window closes, orchestrated
-            workflows delete it automatically, at scale.
-          </p>
+          <ProblemSolution problem={chapter.problem} solution={chapter.solution} className="mt-8" />
           <dl className="mt-10 grid grid-cols-2 gap-6">
             <div className="border-t border-brass/30 pt-3">
               <dd className="display figures text-4xl text-bone md:text-5xl">75%</dd>
