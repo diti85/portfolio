@@ -43,13 +43,13 @@ export default function Cursor() {
       raf = requestAnimationFrame(loop);
     };
     window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true, capture: true });
     document.documentElement.addEventListener("pointerleave", onLeave);
     raf = requestAnimationFrame(loop);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("scroll", onScroll, { capture: true });
       document.documentElement.removeEventListener("pointerleave", onLeave);
     };
   }, [fine, reduced]);

@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import { capabilities, credentials, profile, timeline } from "../data/content";
-import SectionHead from "./SectionHead";
 import { useMediaQuery } from "../lib/useInView";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -133,9 +132,8 @@ export default function Experience() {
   const todayF = frac(TODAY);
 
   return (
-    <section id="experience" aria-labelledby="experience-title" className="relative pt-24 md:pt-36">
-      <SectionHead label="Experience" note="Roles, education, toolkit and résumé" />
-      <div className="frame mt-12 md:mt-16">
+    <section id="experience" aria-labelledby="experience-title" className="relative pt-14 md:pt-24">
+      <div className="frame">
         <div className="grid gap-8 lg:grid-cols-12">
           <h2
             id="experience-title"

@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import Lenis from "lenis";
 
 let lenis = null;
+let locks = 0;
 
 export function startSmoothScroll() {
   if (lenis) return lenis;
-  lenis = new Lenis({ autoRaf: true, lerp: 0.11, anchors: true });
+  // Anchor clicks are routed by goTo() (lib/sheets.jsx), not by Lenis.
+  lenis = new Lenis({ autoRaf: true, lerp: 0.11, anchors: false });
+  if (locks > 0) lenis.stop();
   return lenis;
 }
 
@@ -14,7 +17,8 @@ export function stopSmoothScroll() {
   lenis = null;
 }
 
-export function lockScroll(locked) {
+function applyLock() {
+  const locked = locks > 0;
   if (lenis) {
     if (locked) lenis.stop();
     else lenis.start();
@@ -22,12 +26,30 @@ export function lockScroll(locked) {
   document.documentElement.style.overflow = locked ? "hidden" : "";
 }
 
+// Locks nest: a case study opened inside a sheet keeps the page locked when
+// it closes, because the sheet still holds its own lock.
+export function lockScroll(locked) {
+  locks = Math.max(0, locks + (locked ? 1 : -1));
+  applyLock();
+}
+
+export function releaseAllScrollLocks() {
+  locks = 0;
+  applyLock();
+}
+
 export function scrollToId(id) {
-  // Navigating always releases a lock left by a closing menu or palette;
-  // a stopped Lenis ignores scrollTo, and overflow: clip blocks it outright.
-  lockScroll(false);
   const el = id === "top" ? 0 : document.getElementById(id);
   if (el === null) return;
+
+  // Inside an open sheet, scroll the sheet rather than the page.
+  if (el !== 0 && el.closest("[data-sheet-scroll]")) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
+  // Navigating the page releases locks left behind by closing menus.
+  releaseAllScrollLocks();
   if (lenis) {
     lenis.scrollTo(el, { duration: 1.4 });
   } else if (el === 0) {

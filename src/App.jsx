@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { MotionConfig, useReducedMotion } from "motion/react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Work from "./components/Work";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
 import About from "./components/About";
+import Explore from "./components/Explore";
+import Sheet from "./components/Sheet";
+import SheetProvider from "./components/SheetProvider";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CommandPalette from "./components/CommandPalette";
@@ -35,26 +35,30 @@ export default function App() {
   }, []);
 
   return (
-    <MotionConfig reducedMotion="user">
-      <a
-        href="#about"
-        className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-full bg-gilt px-4 py-2 text-sm text-lacquer focus:translate-y-0"
-      >
-        Skip to content
-      </a>
-      <Nav onOpenPalette={() => setPalette(true)} />
-      <main>
-        <Hero />
-        <About />
-        <Work />
-        <Experience />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-      <CommandPalette open={palette} onClose={closePalette} />
-      <Cursor />
-      <div className="grain" aria-hidden="true" />
-    </MotionConfig>
+    <SheetProvider>
+      <MotionConfig reducedMotion="user">
+        <a
+          href="#about"
+          className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-full bg-gilt px-4 py-2 text-sm text-lacquer focus:translate-y-0"
+        >
+          Skip to content
+        </a>
+        {/* the page; made inert while a sheet is open */}
+        <div data-page>
+          <Nav onOpenPalette={() => setPalette(true)} />
+          <main>
+            <Hero />
+            <About />
+            <Explore />
+            <Contact />
+          </main>
+          <Footer />
+        </div>
+        <Sheet />
+        <CommandPalette open={palette} onClose={closePalette} />
+        <Cursor />
+        <div className="grain" aria-hidden="true" />
+      </MotionConfig>
+    </SheetProvider>
   );
 }

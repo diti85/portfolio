@@ -32,10 +32,41 @@ export const profile = {
 
 export const nav = [
   { id: "about", label: "About", hint: "Who I am and what I do" },
-  { id: "work", label: "Work", hint: "Problems I solve at GEICO" },
-  { id: "experience", label: "Experience", hint: "Timeline, toolkit, résumé" },
-  { id: "projects", label: "Projects", hint: "OneAMS, AIP, client websites" },
+  { id: "work", label: "Work", hint: "Opens the GEICO section" },
+  { id: "experience", label: "Experience", hint: "Opens the timeline and résumé" },
+  { id: "projects", label: "Projects", hint: "Opens OneAMS, AIP and client sites" },
   { id: "contact", label: "Contact", hint: "Email and form" },
+];
+
+// The three sections that open as full-screen sheets from the Explore panels.
+export const sheets = [
+  {
+    id: "work",
+    title: "Work at GEICO",
+    tab: "Work",
+    kicker: "Professional work, 2024 to now",
+    summary:
+      "The problems I solve on the Enterprise Data team, each told problem first, with a working model of the system.",
+    contents: "Ingestion, observability, retention",
+  },
+  {
+    id: "experience",
+    title: "Experience",
+    tab: "Experience",
+    kicker: "2021 to now",
+    summary:
+      "Roles, education and credentials on one timeline, then the tools I use and the full résumé.",
+    contents: "GEICO, Wizard Studios, UIUC, UCF",
+  },
+  {
+    id: "projects",
+    title: "Projects",
+    tab: "Projects",
+    kicker: "Independent work",
+    summary:
+      "Products I designed and launched, a nonprofit brought back online, and websites for local businesses.",
+    contents: "OneAMS, AIP, YMOD, Sunrise, five client sites",
+  },
 ];
 
 // The introduction right after the hero. The through-line is solving real

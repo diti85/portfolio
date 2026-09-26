@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { createLoom } from "./loom";
 import { useVisibility } from "../../lib/useInView";
+import { useSheet } from "../../lib/sheets";
 
 export default function LoomCanvas() {
   const canvasRef = useRef(null);
@@ -58,13 +59,28 @@ export default function LoomCanvas() {
     };
   }, [reduced]);
 
-  const onVisible = useCallback((visible) => {
+  // Run only while on screen and not covered by an open sheet.
+  const { openId } = useSheet();
+  const visible = useRef(false);
+  const covered = useRef(false);
+  const sync = useCallback(() => {
     const loom = loomRef.current;
     if (!loom) return;
-    if (visible) loom.start();
+    if (visible.current && !covered.current) loom.start();
     else loom.stop();
   }, []);
+  const onVisible = useCallback(
+    (v) => {
+      visible.current = v;
+      sync();
+    },
+    [sync],
+  );
   useVisibility(canvasRef, onVisible, "0px");
+  useEffect(() => {
+    covered.current = Boolean(openId);
+    sync();
+  }, [openId, sync]);
 
   if (failed) return null;
   return <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 h-full w-full" />;

@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
 import { clientSites, projects } from "../data/content";
-import { lockScroll, scrollToId } from "../lib/scroll";
-import SectionHead from "./SectionHead";
+import { lockScroll } from "../lib/scroll";
+import { goTo } from "../lib/sheets";
 import { useMediaQuery } from "../lib/useInView";
 
 const EASE = [0.22, 1, 0.36, 1];
@@ -149,6 +149,7 @@ function CaseStudy({ project, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="case-title"
+        data-nested-dialog
         data-lenis-prevent
         initial={{ x: "8%", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
@@ -301,7 +302,7 @@ function ClientSites() {
           href="#contact"
           onClick={(e) => {
             e.preventDefault();
-            scrollToId("contact");
+            goTo("contact");
           }}
           className="thread-link text-gilt"
         >
@@ -340,9 +341,8 @@ export default function Projects() {
   const [open, setOpen] = useState(null);
   const close = useCallback(() => setOpen(null), []);
   return (
-    <section id="projects" aria-labelledby="projects-title" className="relative pt-24 md:pt-36">
-      <SectionHead label="Projects" note="Independent work: products, a nonprofit and clients" />
-      <div className="frame mt-12 md:mt-16">
+    <section id="projects" aria-labelledby="projects-title" className="relative pt-14 md:pt-24">
+      <div className="frame">
         <div className="grid gap-8 lg:grid-cols-12">
           <h2
             id="projects-title"

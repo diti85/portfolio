@@ -1,11 +1,11 @@
 import portrait from "../assets/portrait.webp";
 import SectionHead from "./SectionHead";
 import { intro, profile } from "../data/content";
-import { scrollToId } from "../lib/scroll";
+import { goTo } from "../lib/sheets";
 
 const jump = (href) => (e) => {
   e.preventDefault();
-  scrollToId(href.slice(1));
+  goTo(href.slice(1), e.currentTarget);
 };
 
 // The introduction: who, where and what, answered within the first two screens.

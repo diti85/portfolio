@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { nav, profile, projects } from "../data/content";
-import { lockScroll, scrollToId } from "../lib/scroll";
+import { lockScroll } from "../lib/scroll";
+import { goTo } from "../lib/sheets";
 
 const EASE = [0.22, 1, 0.36, 1];
 
@@ -20,7 +21,7 @@ function useCommands(close) {
         group: "Go to",
         label: n.label,
         hint: n.hint,
-        run: () => scrollToId(n.id),
+        run: () => goTo(n.id),
       })),
       {
         group: "Contact",
@@ -119,6 +120,7 @@ function Palette({ onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label="Command menu"
+        data-nested-dialog
         data-lenis-prevent
         initial={{ opacity: 0, y: -10, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}

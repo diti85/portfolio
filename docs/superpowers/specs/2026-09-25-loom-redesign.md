@@ -86,3 +86,11 @@ Endrit is not a "data engineer". The through-line is building software that solv
 problems. The hero states it, the About pillars group the evidence by where the problems come
 from (GEICO, his own products, businesses and nonprofits), and each GEICO chapter opens with
 the problem. His GEICO team is now called Enterprise Data (formerly Data Engineering).
+
+## Explore panels and sheets (2026-09-26)
+
+Endrit didn't want visitors scrolling through Work to reach Experience. The page now ends its
+scroll at Contact: after About, three Explore panels (Work at GEICO, Experience, Projects) widen
+on hover and open their section as a full-screen sheet that grows out of the panel. Closing
+(button, Esc, or Back) shrinks it back. Sheets carry tabs to switch sections, a progress line,
+and a "Next" link. URLs stay shareable (`/#experience`, `/#retention`).

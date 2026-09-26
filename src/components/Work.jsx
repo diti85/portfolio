@@ -1,4 +1,3 @@
-import SectionHead from "./SectionHead";
 import Pipeline from "./Pipeline";
 import Lineage from "./Lineage";
 import Retention from "./Retention";
@@ -8,10 +7,8 @@ import { scrollToId } from "../lib/scroll";
 // Professional work, labelled and given context before the deep dives.
 export default function Work() {
   return (
-    <section id="work" aria-labelledby="work-title" className="relative pt-24 md:pt-36">
-      <SectionHead label="Work" note="Professional work at GEICO, 2024 to now" />
-
-      <div className="frame mt-12 grid gap-10 md:mt-16 lg:grid-cols-12">
+    <section id="work" aria-labelledby="work-title" className="relative pt-14 md:pt-24">
+      <div className="frame grid gap-10 lg:grid-cols-12">
         <h2
           id="work-title"
           className="display text-[clamp(3rem,7.4vw,7rem)] leading-[0.9] tracking-[-0.03em] lg:col-span-6"

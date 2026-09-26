@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
 import { nav, profile } from "../data/content";
-import { lockScroll, scrollToId, useActiveSection } from "../lib/scroll";
+import { lockScroll, useActiveSection } from "../lib/scroll";
+import { goTo } from "../lib/sheets";
 
 const EASE = [0.22, 1, 0.36, 1];
-const ids = nav.map((n) => n.id);
+// Only About and Contact live on the page; the rest open as sheets.
+const ids = ["about", "explore", "contact"];
 
 export default function Nav({ onOpenPalette }) {
   const [scrolled, setScrolled] = useState(false);
@@ -22,17 +24,20 @@ export default function Nav({ onOpenPalette }) {
   }, []);
 
   useEffect(() => {
-    lockScroll(open);
     if (!open) return undefined;
+    lockScroll(true);
     const onKey = (e) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      lockScroll(false);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   const go = (id) => (e) => {
     e.preventDefault();
     setOpen(false);
-    scrollToId(id);
+    goTo(id, e.currentTarget);
   };
 
   return (
