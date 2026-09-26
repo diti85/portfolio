@@ -1,54 +1,283 @@
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/space-grotesk/500.css";
-@import "@fontsource/space-grotesk/700.css";
-@import "@fontsource/jetbrains-mono/400.css";
-@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource-variable/bodoni-moda/opsz.css";
+@import "@fontsource-variable/bodoni-moda/opsz-italic.css";
+@import "@fontsource-variable/hanken-grotesk/wght.css";
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+ * "Loom" — lacquer green, brass thread, bone type.
+ * Every figure on the page is drawn with hairlines; brass is reserved for
+ * thread (lines, particles, links), never for large fills.
+ */
+@theme {
+  --color-lacquer: #0b1d18;
+  --color-lacquer-deep: #071310;
+  --color-felt: #10271f;
+  --color-brass: #c8a56a;
+  --color-gilt: #ebd29f;
+  --color-bone: #eee7d8;
+  --color-sage: #a9b3a8;
+  --color-moss: #7f8f85;
+  --color-ok: #8fd1b0;
+  --color-warn: #f0a04b;
+  --color-fail: #ee5a45;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  color-scheme: dark;
+  --font-display: "Bodoni Moda Variable", "Bodoni 72", Didot, serif;
+  --font-sans: "Hanken Grotesk Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /* Classic typographic scale (Bringhurst): 12 14 16 18 21 24 36 48 60 72 */
+  --text-2xs: 0.75rem;
+  --text-2xs--line-height: 1.4;
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.6;
+  --text-base: 1.125rem;
+  --text-base--line-height: 1.65;
+  --text-lg: 1.3125rem;
+  --text-lg--line-height: 1.5;
+  --text-xl: 1.5rem;
+  --text-xl--line-height: 1.35;
+  --text-2xl: 2.25rem;
+  --text-2xl--line-height: 1.12;
+  --text-3xl: 3rem;
+  --text-3xl--line-height: 1.05;
+  --text-4xl: 3.75rem;
+  --text-4xl--line-height: 1;
+  --text-5xl: 4.5rem;
+  --text-5xl--line-height: 0.98;
+
+  --breakpoint-xs: 28rem;
+
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-body {
-  font-family: "Inter", system-ui, sans-serif;
-  background-color: #0a0a0b;
-  color: #a1a1aa;
+@layer base {
+  html {
+    background: var(--color-lacquer);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-lacquer);
+    color: var(--color-sage);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: var(--color-bone);
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-gilt);
+    color: var(--color-lacquer);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-gilt);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
 }
 
-::selection {
-  background: rgba(255, 59, 59, 0.35);
-  color: #f4f4f5;
+@layer components {
+  /* Page-wide measure and gutters */
+  .frame {
+    width: 100%;
+    max-width: 90rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4.5vw, 4rem);
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--color-bone);
+  }
+
+  .figures {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* A link that underlines with a brass hairline drawn from the left */
+  .thread-link {
+    background-image: linear-gradient(var(--color-brass), var(--color-brass));
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s var(--ease-silk), color 0.3s;
+  }
+  .thread-link:hover,
+  .thread-link:focus-visible {
+    background-size: 100% 1px;
+    color: var(--color-bone);
+  }
+
+  /* Dotted leader between a label and its value, as in a ledger */
+  .leader {
+    flex: 1;
+    min-width: 1.5rem;
+    border-bottom: 1px dotted color-mix(in oklab, var(--color-brass) 45%, transparent);
+    transform: translateY(-0.3em);
+  }
 }
 
-.hash-span {
-  margin-top: -100px;
-  padding-bottom: 100px;
-  display: block;
+/* Film grain: one static texture over everything, never animated */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-/* Signal-line motif: glowing dot used in eyebrows and timeline */
-.signal-dot {
-  display: inline-block;
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Lineage demo: healthy edges carry a slow brass current */
+.edge-flow {
+  stroke: var(--color-brass);
+  stroke-opacity: 0.6;
+  stroke-dasharray: 2 10;
+  animation: edge-flow 1.4s linear infinite;
+}
+@keyframes edge-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+/* The health engine's periodic sweep across the graph */
+.sweep-x {
+  animation: sweep-x 8s var(--ease-silk) infinite;
+}
+.sweep-y {
+  animation: sweep-y 8s var(--ease-silk) infinite;
+}
+@keyframes sweep-x {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(1000px);
+    opacity: 1;
+  }
+  61%,
+  100% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+}
+@keyframes sweep-y {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(640px);
+    opacity: 1;
+  }
+  61%,
+  100% {
+    transform: translateY(640px);
+    opacity: 0;
+  }
+}
+
+/* Pointer companion (fine pointers only; see Cursor.jsx) */
+.cursor-ring__body {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 1px solid rgba(235, 210, 159, 0.5);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    width 0.45s var(--ease-silk),
+    height 0.45s var(--ease-silk),
+    margin 0.45s var(--ease-silk),
+    padding 0.45s var(--ease-silk),
+    background-color 0.35s,
+    border-color 0.35s;
+}
+.cursor-ring[data-state="hot"] .cursor-ring__body {
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-color: var(--color-gilt);
+}
+.cursor-ring[data-state="text"] .cursor-ring__body {
   width: 6px;
   height: 6px;
-  border-radius: 9999px;
-  background: #ff3b3b;
-  box-shadow: 0 0 8px rgba(255, 59, 59, 0.9);
-  vertical-align: middle;
-  margin-right: 8px;
+  margin: -3px 0 0 -3px;
+  background: var(--color-gilt);
 }
-
-/* Static crimson glow behind the hero; also the WebGL-failure fallback */
-.hero-glow {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 65%, rgba(122, 21, 35, 0.35) 0%, rgba(10, 10, 11, 0) 65%),
-    #0a0a0b;
+.cursor-ring[data-state="label"] .cursor-ring__body {
+  width: auto;
+  height: 28px;
+  margin: 14px 0 0 14px;
+  padding: 0 12px;
+  background: var(--color-gilt);
+  border-color: var(--color-gilt);
+}
+.cursor-ring__label {
+  font-size: 12px;
+  line-height: 1;
+  color: var(--color-lacquer);
+  display: none;
+}
+.cursor-ring[data-state="label"] .cursor-ring__label {
+  display: inline;
 }

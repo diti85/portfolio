@@ -1,160 +1,190 @@
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { fadeUp } from "../utils/motion";
-import { SectionWrapper } from "../hoc";
-import SectionHeader from "./SectionHeader";
-import { EmberFieldCanvas } from "./canvas";
+import { profile } from "../data/content";
 
-const inputClasses =
-  "bg-surface border border-white/10 focus:border-accent/70 py-3.5 px-5 text-heading placeholder:text-body/60 rounded-lg outline-none text-[15px] transition-colors";
+const field =
+  "w-full border-0 border-b border-bone/15 bg-transparent px-0 py-3 text-base text-bone placeholder:text-moss/70 transition-colors focus:border-gilt focus:outline-none focus:ring-0";
 
-const Contact = () => {
-  const formRef = useRef();
+function LocalTime() {
+  const [time, setTime] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setTime(new Date()), 30_000);
+    return () => clearInterval(id);
+  }, []);
+  const text = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: profile.timeZone,
+  }).format(time);
+  return (
+    <span>
+      It&rsquo;s <span className="figures text-bone">{text}</span> in {profile.location}.
+    </span>
+  );
+}
+
+export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // null | "sent" | "error"
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
+  const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setStatus(null);
-
-    emailjs
-      .send(
+    setStatus("sending");
+    try {
+      await emailjs.send(
         "service_vh8j5y8",
         "template_bpbn6p8",
         {
           from_name: form.name,
-          to_name: "Endrit Basha",
+          to_name: profile.name,
           from_email: form.email,
-          to_email: "bashaditi@gmail.com",
+          to_email: profile.email,
           message: form.message,
         },
-        "zSKYmPunmMrSb9wIA"
-      )
-      .then(
-        () => {
-          setLoading(false);
-          setStatus("sent");
-          setForm({ name: "", email: "", message: "" });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-          setStatus("error");
-        }
+        { publicKey: "zSKYmPunmMrSb9wIA" },
       );
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {
+      window.location.href = `mailto:${profile.email}`;
+    }
   };
 
   return (
-    <>
-      {/* sparse, dimmed reuse of the hero ember system */}
-      <div className="absolute inset-0 -z-10 opacity-60 pointer-events-none">
-        <EmberFieldCanvas density={0.35} opacity={0.35} interactive={false} />
-      </div>
-
-      <SectionHeader eyebrow="05 — Contact" title="Get in touch" />
-
-      <div className="mt-10 grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16">
-        <motion.form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          variants={fadeUp(0.1)}
-          className="lg:col-span-3 flex flex-col gap-5"
+    <section
+      id="contact"
+      aria-labelledby="contact-title"
+      className="relative pb-24 pt-28 md:pb-32 md:pt-44"
+    >
+      <div className="frame">
+        <h2
+          id="contact-title"
+          className="display text-[clamp(4rem,14vw,12.5rem)] leading-[0.86] tracking-[-0.035em]"
         >
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[12px] text-body uppercase tracking-[0.15em]">
-              Name
-            </span>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Your name"
-              required
-              className={inputClasses}
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[12px] text-body uppercase tracking-[0.15em]">
-              Email
-            </span>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              required
-              className={inputClasses}
-            />
-          </label>
-          <label className="flex flex-col gap-2">
-            <span className="font-mono text-[12px] text-body uppercase tracking-[0.15em]">
-              Message
-            </span>
-            <textarea
-              rows={6}
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              placeholder="What's on your mind?"
-              required
-              className={inputClasses}
-            />
-          </label>
+          Let&rsquo;s talk.
+        </h2>
 
-          <div className="flex items-center gap-4">
-            <button
-              type="submit"
-              disabled={loading}
-              className="font-mono text-[14px] px-7 py-3 rounded-lg bg-accent/10 border border-accent/60 text-heading hover:bg-accent/20 transition-colors disabled:opacity-50 w-fit"
-            >
-              {loading ? "Sending..." : "Send message"}
-            </button>
-            {status === "sent" && (
-              <p className="font-mono text-[13px] text-accent">
-                Thanks &mdash; I&apos;ll get back to you soon.
-              </p>
-            )}
-            {status === "error" && (
-              <p className="font-mono text-[13px] text-body">
-                Something went wrong. Please try again.
-              </p>
-            )}
-          </div>
-        </motion.form>
+        <div className="mt-14 grid gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <p className="max-w-[40ch] text-base md:text-lg">
+              Whether it&rsquo;s a role, a project, or a question about something on this page,
+              write to me directly or use the form.
+            </p>
 
-        <motion.div variants={fadeUp(0.2)} className="lg:col-span-2 flex flex-col gap-6">
-          <p className="text-body text-[15px] leading-relaxed">
-            Whether you have a role in mind, a project to collaborate on, or
-            just want to talk engineering &mdash; my inbox is open.
-          </p>
-          <div className="font-mono text-[13px] bg-surface border border-white/5 rounded-xl p-5 flex flex-col gap-2.5">
-            <p>
-              <span className="text-accent">email</span>
-              <span className="text-body"> — bashaditi@gmail.com</span>
-            </p>
-            <p>
-              <span className="text-accent">github</span>
-              <span className="text-body"> — github.com/diti85</span>
-            </p>
-            <p>
-              <span className="text-accent">linkedin</span>
-              <span className="text-body"> — linkedin.com/in/endritbasha</span>
+            <div className="mt-10 flex flex-wrap items-center gap-x-4 gap-y-3">
+              <a
+                href={`mailto:${profile.email}`}
+                className="display thread-link text-2xl text-bone sm:text-3xl"
+              >
+                {profile.email}
+              </a>
+              <button
+                type="button"
+                onClick={copy}
+                className="h-8 rounded-full border border-bone/15 px-3 text-2xs text-sage transition-colors hover:border-brass/60 hover:text-bone"
+              >
+                <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
+              </button>
+            </div>
+
+            <ul className="mt-10 flex flex-col border-t border-bone/10 text-sm">
+              {[
+                ["LinkedIn", profile.links.linkedin, "linkedin.com/in/endritbasha"],
+                ["GitHub", profile.links.github, "github.com/diti85"],
+                ["Résumé", profile.resume, "PDF, one page"],
+              ].map(([label, href, note]) => (
+                <li key={label} className="border-b border-bone/10">
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex items-baseline justify-between gap-4 py-4 transition-colors hover:text-bone"
+                  >
+                    <span className="display text-xl text-bone transition-transform duration-500 group-hover:translate-x-1.5">
+                      {label}
+                    </span>
+                    <span className="text-xs text-moss">{note}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-8 text-sm text-moss">
+              <LocalTime />
             </p>
           </div>
-        </motion.div>
+
+          <form onSubmit={onSubmit} className="flex flex-col gap-8 lg:col-span-6 lg:col-start-7">
+            <label className="flex flex-col gap-1">
+              <span className="text-xs text-moss">Your name</span>
+              <input
+                name="name"
+                autoComplete="name"
+                required
+                value={form.name}
+                onChange={onChange}
+                className={field}
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs text-moss">Your email</span>
+              <input
+                type="email"
+                name="email"
+                autoComplete="email"
+                required
+                value={form.email}
+                onChange={onChange}
+                className={field}
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-xs text-moss">Message</span>
+              <textarea
+                name="message"
+                rows={5}
+                required
+                value={form.message}
+                onChange={onChange}
+                className={`${field} resize-none`}
+              />
+            </label>
+
+            <div className="flex flex-wrap items-center gap-5">
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="h-12 rounded-full bg-gilt px-7 text-sm text-lacquer transition-colors hover:bg-bone disabled:opacity-60"
+              >
+                {status === "sending" ? "Sending…" : "Send message"}
+              </button>
+              <p aria-live="polite" className="text-sm">
+                {status === "sent" && (
+                  <span className="text-ok">Message sent. I&rsquo;ll be in touch.</span>
+                )}
+                {status === "error" && (
+                  <span className="text-warn">
+                    The message didn&rsquo;t go through. Email me at {profile.email} instead.
+                  </span>
+                )}
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
-    </>
+    </section>
   );
-};
-
-export default SectionWrapper(Contact, "contact");
+}

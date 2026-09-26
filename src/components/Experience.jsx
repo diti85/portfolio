@@ -1,76 +1,257 @@
-import { motion } from "framer-motion";
-import { experiences } from "../constants";
-import { fadeUp, EASE } from "../utils/motion";
-import { SectionWrapper } from "../hoc";
-import SectionHeader from "./SectionHeader";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
+import { ledger, timeline } from "../data/content";
+import { useMediaQuery } from "../lib/useInView";
 
-const ExperienceCard = ({ experience, index }) => (
-  <motion.div variants={fadeUp(index * 0.06)} className="relative pl-14 sm:pl-20 pb-14 last:pb-0">
-    <span className="absolute left-[11px] top-1.5 w-[10px] h-[10px] rounded-full bg-accent shadow-[0_0_12px_rgba(255,59,59,0.8)]" />
+const EASE = [0.22, 1, 0.36, 1];
+const FROM = 2020;
+const TO = 2028;
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    <div className="flex items-center gap-4">
-      <span className="w-12 h-12 rounded-lg bg-surface border border-white/10 flex items-center justify-center overflow-hidden shrink-0">
-        {experience.icon ? (
-          <img
-            src={experience.icon}
-            alt={experience.company_name}
-            className="w-8 h-8 object-contain"
+const now = new Date();
+const TODAY = [now.getFullYear(), now.getMonth() + 1];
+
+const frac = ([y, m]) => (y + (m - 1) / 12 - FROM) / (TO - FROM);
+const pct = (f) => `${(Math.min(1, Math.max(0, f)) * 100).toFixed(3)}%`;
+const fmtDate = (d) => (d ? `${MONTHS[d[1] - 1]} ${d[0]}` : null);
+
+function dates(item) {
+  const end = item.end ? fmtDate(item.end) : "Present";
+  if (!item.start) return `Graduated ${end}`;
+  return `${fmtDate(item.start)} – ${item.expected ? `expected ${end}` : end}`;
+}
+
+function Thread({ item, index, selected, onSelect, drawn, reduced, wide }) {
+  const start = item.start ? frac(item.start) : 0;
+  const todayF = frac(TODAY);
+  const endF = item.end ? frac(item.end) : todayF;
+  const solidEnd = item.expected ? Math.min(endF, todayF) : endF;
+  const ongoing = !item.end || (item.expected && endF > todayF);
+  // Labels for threads that start late hang from the thread's end instead.
+  const anchorRight = start > (wide ? 0.55 : 0.45);
+  const dim = !selected;
+
+  const grow = (delay) =>
+    reduced
+      ? {}
+      : {
+          initial: { scaleX: 0 },
+          animate: drawn ? { scaleX: 1 } : { scaleX: 0 },
+          transition: { duration: 1.3, delay, ease: EASE },
+        };
+
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      className="group relative block h-[76px] w-full text-left sm:h-[84px]"
+    >
+      <span
+        className={`absolute top-2 z-10 flex flex-col bg-lacquer py-0.5 transition-opacity duration-500 ${anchorRight ? "items-end pl-2 text-right" : "pr-2"} ${
+          dim ? "opacity-55 group-hover:opacity-90" : "opacity-100"
+        }`}
+        style={anchorRight ? { right: `calc(100% - ${pct(endF)})` } : { left: pct(start) }}
+      >
+        <span className="whitespace-nowrap text-sm text-bone">{item.org}</span>
+        <span className="whitespace-nowrap text-2xs text-moss sm:text-xs">{item.title}</span>
+      </span>
+
+      {/* the thread */}
+      <span className="absolute inset-x-0 bottom-5 h-px">
+        {!item.start && (
+          <motion.span
+            className="absolute inset-y-0 origin-left bg-gradient-to-r from-transparent to-brass"
+            style={{ left: 0, width: pct(endF) }}
+            {...grow(index * 0.12)}
           />
-        ) : (
-          <span className="font-mono text-[18px] font-medium text-accent">
-            {experience.abbr}
+        )}
+        {item.start && (
+          <motion.span
+            className={`absolute inset-y-0 origin-left transition-colors duration-500 ${selected ? "bg-gilt" : "bg-brass/60"}`}
+            style={{ left: pct(start), width: pct(solidEnd - start) }}
+            {...grow(index * 0.12)}
+          />
+        )}
+        {item.expected && endF > todayF && (
+          <motion.span
+            className="absolute -top-px h-0 origin-left border-t border-dashed border-brass/50"
+            style={{ left: pct(todayF), width: pct(endF - todayF) }}
+            {...grow(index * 0.12 + 1)}
+          />
+        )}
+
+        {/* beads */}
+        {item.start && (
+          <span
+            className="absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-brass bg-lacquer"
+            style={{ left: pct(start) }}
+          />
+        )}
+        {item.knots?.map((k) => (
+          <span
+            key={k.label}
+            title={k.label}
+            className="absolute top-1/2 size-[9px] -translate-x-1/2 -translate-y-1/2 rotate-45 border border-gilt bg-lacquer"
+            style={{ left: pct(frac(k.at)) }}
+          />
+        ))}
+        {ongoing ? (
+          <span
+            className="absolute top-1/2 grid size-3 -translate-x-1/2 -translate-y-1/2 place-items-center"
+            style={{ left: pct(solidEnd) }}
+          >
+            <span className="absolute inset-0 animate-ping rounded-full bg-gilt/40" />
+            <span className="size-[7px] rounded-full bg-gilt" />
           </span>
+        ) : (
+          <span
+            className="absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brass"
+            style={{ left: pct(endF) }}
+          />
+        )}
+        {item.expected && (
+          <span
+            className="absolute top-1/2 size-[7px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brass bg-lacquer"
+            style={{ left: pct(endF) }}
+          />
         )}
       </span>
-      <div>
-        <p className="font-mono text-[12px] text-accent tracking-[0.15em] uppercase">
-          {experience.date}
-        </p>
-        <h3 className="font-display text-heading text-[20px] sm:text-[24px] font-bold leading-tight mt-0.5">
-          {experience.title}
-        </h3>
-        <p className="text-body text-[14px]">{experience.company_name}</p>
-      </div>
-    </div>
-
-    {experience.points.length > 0 && (
-      <ul className="mt-4 flex flex-col gap-2">
-        {experience.points.map((point, i) => (
-          <li
-            key={`exp-${index}-point-${i}`}
-            className="text-body text-[14px] leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[9px] before:w-1.5 before:h-px before:bg-accent/70"
-          >
-            {point}
-          </li>
-        ))}
-      </ul>
-    )}
-  </motion.div>
-);
-
-const Experience = () => {
-  return (
-    <>
-      <SectionHeader eyebrow="02 — Experience" title="Where I've been" />
-
-      <div className="relative mt-14">
-        <motion.div
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 1.4, ease: EASE }}
-          className="absolute left-[15px] top-1.5 bottom-6 w-px origin-top bg-gradient-to-b from-accent via-accent/40 to-transparent"
-        />
-        {experiences.map((experience, index) => (
-          <ExperienceCard
-            key={`experience-${index}`}
-            experience={experience}
-            index={index}
-          />
-        ))}
-      </div>
-    </>
+    </button>
   );
-};
+}
 
-export default SectionWrapper(Experience, "work");
+export default function Experience() {
+  const chartRef = useRef(null);
+  const drawn = useInView(chartRef, { once: true, amount: 0.35 });
+  const reduced = useReducedMotion();
+  const wide = useMediaQuery("(min-width: 768px)");
+  const [selectedId, setSelectedId] = useState("geico");
+  const selected = timeline.find((t) => t.id === selectedId);
+  const years = Array.from({ length: TO - FROM + 1 }, (_, i) => FROM + i);
+  const todayF = frac(TODAY);
+
+  return (
+    <section id="experience" aria-labelledby="experience-title" className="relative pt-28 md:pt-40">
+      <div className="frame">
+        <div className="grid gap-8 lg:grid-cols-12">
+          <h2
+            id="experience-title"
+            className="display text-[clamp(3rem,8.4vw,8rem)] leading-[0.9] tracking-[-0.03em] lg:col-span-7"
+          >
+            Experience.
+          </h2>
+          <p className="max-w-[46ch] self-end text-base md:text-lg lg:col-span-4 lg:col-start-9">
+            From full-stack client work at a small studio to the data platforms behind one of the
+            largest auto insurers in the U.S. Select a thread for the details.
+          </p>
+        </div>
+
+        <div ref={chartRef} className="relative mt-14 md:mt-20">
+          {/* today */}
+          <div
+            className="pointer-events-none absolute inset-y-0 z-0"
+            style={{ left: pct(todayF) }}
+            aria-hidden="true"
+          >
+            <span className="absolute -top-6 -translate-x-1/2 text-2xs text-gilt">Today</span>
+            <span className="absolute inset-y-0 w-px bg-gradient-to-b from-gilt/60 via-gilt/20 to-transparent" />
+          </div>
+
+          <div className="relative z-10">
+            {timeline.map((item, i) => (
+              <Thread
+                key={item.id}
+                item={item}
+                index={i}
+                selected={item.id === selectedId}
+                onSelect={() => setSelectedId(item.id)}
+                drawn={drawn}
+                reduced={reduced}
+                wide={wide}
+              />
+            ))}
+          </div>
+
+          {/* axis */}
+          <div className="relative mt-2 h-8 border-t border-bone/10" aria-hidden="true">
+            {years.map((y, i) => (
+              <span
+                key={y}
+                className={`figures absolute top-2 -translate-x-1/2 text-2xs text-moss ${i % 2 ? "hidden sm:block" : ""} ${
+                  i === 0 ? "translate-x-0" : i === years.length - 1 ? "-translate-x-full" : ""
+                }`}
+                style={{ left: pct((y - FROM) / (TO - FROM)) }}
+              >
+                {y}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* details */}
+        <div
+          className="mt-12 grid gap-8 border-t border-brass/30 pt-10 lg:grid-cols-12"
+          aria-live="polite"
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={selected.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.45, ease: EASE }}
+              className="grid gap-8 lg:col-span-12 lg:grid-cols-12"
+            >
+              <div className="lg:col-span-4">
+                <p className="figures text-xs text-moss">{dates(selected)}</p>
+                <h3 className="display mt-3 text-3xl md:text-4xl">{selected.org}</h3>
+                <p className="mt-2 text-base text-bone/85">{selected.title}</p>
+                <p className="mt-1 text-sm text-moss">{selected.place}</p>
+                {selected.knots?.map((k) => (
+                  <p key={k.label} className="mt-4 flex items-center gap-2 text-xs text-gilt">
+                    <span className="size-2 rotate-45 border border-gilt" aria-hidden="true" />
+                    {k.label}, {fmtDate(k.at)}
+                  </p>
+                ))}
+              </div>
+              <ul className="flex flex-col gap-4 lg:col-span-7 lg:col-start-6">
+                {selected.points.map((p) => (
+                  <li key={p} className="relative max-w-[66ch] pl-6 text-base">
+                    <span
+                      className="absolute left-0 top-[0.8em] h-px w-3 bg-brass"
+                      aria-hidden="true"
+                    />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ledger */}
+        <div className="mt-24 grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <h3 className="display text-3xl md:text-4xl">In figures</h3>
+            <p className="mt-3 max-w-[36ch] text-sm text-moss">
+              Outcomes from my work at GEICO, as they appear on my résumé.
+            </p>
+          </div>
+          <dl className="grid gap-x-12 lg:col-span-8 md:grid-cols-2">
+            {ledger.map((row) => (
+              <div
+                key={row.label}
+                className="flex items-baseline gap-3 border-b border-bone/[0.07] py-4"
+              >
+                <dt className="text-sm">{row.label}</dt>
+                <span className="leader" aria-hidden="true" />
+                <dd className="display figures text-2xl text-bone md:text-3xl">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
