@@ -52,12 +52,9 @@ export default function About() {
             {intro.lead}
           </p>
           <p className="mt-6 max-w-[62ch] text-base md:text-lg">
-            Sometimes the fix is a service that handles thirty million messages a day. Sometimes
-            it&rsquo;s a website that lets a family restaurant take orders online. Either way I care
-            about who&rsquo;s stuck and what &ldquo;solved&rdquo; looks like for them. I&rsquo;m
-            studying part-time for a master&rsquo;s in computer science at the University of
-            Illinois, and before GEICO I spent three years shipping client projects at Wizard
-            Studios.
+            Outside of work I build my own products, OneAMS and AIP, and websites for small
+            businesses and nonprofits. Before GEICO, I spent three years at Wizard Studios building
+            e-commerce and ordering systems for clients.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">

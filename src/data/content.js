@@ -72,8 +72,8 @@ export const sheets = [
 // The introduction right after the hero. The through-line is solving real
 // problems; data systems are one place that happens, not the identity.
 export const intro = {
-  headline: "I start with the problem, then build what fixes it.",
-  lead: "I’m a software engineer at GEICO, on the Enterprise Data team. Outside work I build products and websites for founders, small businesses and nonprofits.",
+  headline: "Hi, I’m Endrit.",
+  lead: "I’m a software engineer at GEICO, on the Enterprise Data team, where I work on the backend systems that move and manage the company’s data.",
   now: "Software Engineer II, GEICO",
   before: "Full-stack engineer, Wizard Studios",
   studying: "M.S. Computer Science, UIUC",
